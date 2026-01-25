@@ -34,7 +34,7 @@
       <span></span>
       <span></span>
     </button>
-    
+
     <nav>
       <a href="#servicios">Servicios</a>
       <a href="#nosotros">Nosotros</a>  
@@ -347,6 +347,22 @@
     btn.disabled = false;
   });
 }
+
+const menuToggle = document.getElementById('menuToggle');
+const navMenu = document.getElementById('navMenu');
+
+menuToggle.addEventListener('click', () => {
+  navMenu.classList.toggle('active');
+  // Animación opcional del botón:
+  menuToggle.classList.toggle('open');
+});
+
+// Cerrar el menú automáticamente al hacer clic en un enlace (ideal para móviles)
+document.querySelectorAll('#navMenu a').forEach(link => {
+  link.addEventListener('click', () => {
+    navMenu.classList.remove('active');
+  });
+});
 </script>
 </body>
 </html>

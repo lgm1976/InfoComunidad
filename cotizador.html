@@ -63,7 +63,7 @@
       <span></span>
       <span></span>
     </button>
-    
+
     <nav>
       <a href="index.html#servicios">Servicios</a>
       <a href="index.html#nosotros">Nosotros</a>
@@ -443,6 +443,22 @@
 
     // Inicializar el primer paso al cargar
     irAlPaso(1);
+
+    const menuToggle = document.getElementById('menuToggle');
+const navMenu = document.getElementById('navMenu');
+
+menuToggle.addEventListener('click', () => {
+  navMenu.classList.toggle('active');
+  // Animación opcional del botón:
+  menuToggle.classList.toggle('open');
+});
+
+// Cerrar el menú automáticamente al hacer clic en un enlace (ideal para móviles)
+document.querySelectorAll('#navMenu a').forEach(link => {
+  link.addEventListener('click', () => {
+    navMenu.classList.remove('active');
+  });
+});
 </script>
 
 </body>
