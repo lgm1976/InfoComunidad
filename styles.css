@@ -814,4 +814,13 @@ footer {
     border-bottom: 1px solid #eee;
     width: 100%;
   }
+
+  .header-inner {
+    padding: 0 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+  }
 }
