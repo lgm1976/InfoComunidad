@@ -244,15 +244,15 @@
       <div class="location-cards">
         <div class="card">
           <strong>Dirección</strong>
-          <p>Avenida de La Albufera 9<br>Madrid</p>
+          <p>Distrito Puente de Vallecas.<br>Madrid</p>
         </div>
         <div class="card">
           <strong>Teléfono</strong>
-          <p>91 000 00 00</p>
+          <p>xxx xxx xxx</p>
         </div>
         <div class="card">
           <strong>Correo electrónico</strong>
-          <p>info@fincasdemo.es</p>
+          <p>luis.gonzalezm@</p>
         </div>
       </div>
 
@@ -268,12 +268,18 @@
   <div class="container center">
     <h2>Contacto e información</h2>
     
-    <form class="card" style="max-width:500px;margin:48px auto 0">
-      <input type="text" placeholder="Nombre" style="width:100%;margin-bottom:16px;padding:12px">
-      <input type="email" placeholder="Email" style="width:100%;margin-bottom:16px;padding:12px">
-      <textarea placeholder="Mensaje" style="width:100%;height:120px;padding:12px"></textarea>
-      <button class="btn btn-primary" style="margin-top:24px">Enviar</button>
-    </form>
+    <div id="contenedorContacto">
+      <form class="card" id="formContacto" style="max-width:500px;margin:48px auto 0">
+        <input type="text" id="cNombre" placeholder="Nombre" style="width:100%;margin-bottom:16px;padding:12px;border:1px solid #ddd;border-radius:4px" required>
+        <input type="email" id="cMail" placeholder="Email" style="width:100%;margin-bottom:16px;padding:12px;border:1px solid #ddd;border-radius:4px" required>
+        <textarea id="cMensaje" placeholder="Escribe aquí tu mensaje..." style="width:100%;height:120px;padding:12px;border:1px solid #ddd;border-radius:4px" required></textarea>
+        
+        <button type="button" class="btn btn-primary" id="btnEnviarContacto" onclick="enviarContacto()" style="margin-top:24px; width:100%">
+          Enviar Mensaje
+        </button>
+      </form>
+    </div>
+
     <p class="legal-note" style="max-width:520px;margin:16px auto 0;font-size:13px;color:#6b4a4f;">
       La información facilitada a través de este formulario será tratada únicamente para gestionar su 
       consulta y contactar con usted en relación con los servicios solicitados. No se utilizará para 
@@ -283,8 +289,53 @@
 </section>
 
 <footer>
-  © 2026 · Servicio Informativo para Comunidades · Demo
+  © 2026 · InfoComunidad · Todos los derechos reservados.
 </footer>
+<script>
+  function enviarContacto() {
+  const btn = document.getElementById('btnEnviarContacto');
+  const nombre = document.getElementById('cNombre').value;
+  const email = document.getElementById('cMail').value;
+  const mensaje = document.getElementById('cMensaje').value;
 
+  // Validación básica
+  if (!nombre || !email || !mensaje) {
+    alert("Por favor, rellena todos los campos.");
+    return;
+  }
+
+  btn.innerText = "Enviando...";
+  btn.disabled = true;
+
+  // URL de tu Google Form (la que termina en /formResponse)
+  const formURL = "AQUÍ_PEGA_TU_URL_DE_GOOGLE_FORM_RESPONSE";
+  
+  const fd = new FormData();
+  // Usamos los códigos que me has pasado
+  fd.append("entry.467394497", nombre);
+  fd.append("entry.2139652702", email);
+  fd.append("entry.1907644416", mensaje);
+
+  fetch(formURL, {
+    method: "POST",
+    mode: "no-cors",
+    body: fd
+  })
+  .then(() => {
+    // Sustituimos el formulario por un mensaje de éxito
+    document.getElementById('contenedorContacto').innerHTML = `
+      <div class="card" style="max-width:500px;margin:48px auto 0;padding:40px;text-align:center;">
+        <div style="font-size:40px;color:#28a745;margin-bottom:20px">✓</div>
+        <h3>¡Mensaje enviado!</h3>
+        <p>Gracias por contactar con InfoComunidad. Te responderemos muy pronto.</p>
+      </div>`;
+  })
+  .catch(err => {
+    alert("Hubo un error al enviar. Por favor, inténtalo de nuevo.");
+    btn.innerText = "Enviar Mensaje";
+    btn.disabled = false;
+  });
+}
+</script>
 </body>
 </html>
