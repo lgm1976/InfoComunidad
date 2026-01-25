@@ -162,6 +162,55 @@ nav a.active {
   box-shadow: 0 10px 20px rgba(91, 15, 26, 0.1);
 }
 
+/* =========================================================
+   RESEÑAS / TESTIMONIOS
+   ========================================================= */
+
+.review-text {
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--text);
+  margin-bottom: 20px;
+  position: relative;
+  line-height: 1.5;
+}
+
+/* Comilla decorativa opcional antes del texto */
+.review-text::before {
+  content: '“';
+  font-family: serif;
+  font-size: 3rem;
+  color: var(--border);
+  position: absolute;
+  top: -20px;
+  left: -10px;
+  opacity: 0.5;
+}
+
+.review-author {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--primary);
+  margin-top: 15px;
+}
+
+.review-role {
+  font-size: 0.85rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-top: 4px;
+}
+
+.rating {
+  color: #b8323a; 
+  font-size: 2rem;
+}
+
+/* =========================================================
+   CARRUSEL
+   ========================================================= */
+
 .carousel-viewport {
   overflow: hidden;
   width: 100%;
@@ -169,14 +218,12 @@ nav a.active {
   position: relative;
 }
 
-/* El carril (el tren) */
 .carousel-track {
   display: flex;
   transition: transform .4s ease;
   gap: 0; 
 }
 
-/* Cada tarjeta (el vagón) */
 .carousel-item {
   flex: 0 0 33.333333%;
   width: 33.333333%;
@@ -184,7 +231,6 @@ nav a.active {
   padding: 0 15px; 
 }
 
-/* En Móvil: 1 tarjeta completa */
 @media (max-width: 767px) {
   .carousel-item {
     flex: 0 0 100%;
@@ -192,7 +238,6 @@ nav a.active {
   }
 }
 
-/* La tarjeta blanca interior */
 .carousel-item .card {
   width: 100%;
   height: 100%;
@@ -202,7 +247,6 @@ nav a.active {
   display: block; 
 }
 
-/* Botones de navegación del carrusel */
 .carousel-btn {
     position: absolute;
     top: 50%;
@@ -580,7 +624,7 @@ footer {
 }
 
 /* =========================================================
-   LEGAL CONSENT (alineado correctamente)
+   LEGAL CONSENT
    ========================================================= */
 
 .legal-consent {
@@ -669,7 +713,6 @@ footer {
    RESPONSIVE (MÓVIL)
    ========================================= */
 @media (max-width: 768px) {
-    /* AJUSTE LOGO: Padding lateral igual al .container (24px) */
     .header-inner {
         padding: 10px 24px; 
     }
@@ -740,7 +783,7 @@ footer {
     margin-bottom: 20px;
 }
 
-/* Estilos para el botón hamburguesa */
+/* Botón hamburguesa */
 .menu-toggle {
   display: none; 
   flex-direction: column;
@@ -760,7 +803,7 @@ footer {
   transition: 0.3s;
 }
 
-/* Media Query para móviles (pantallas de menos de 768px) */
+/* Media Query para móviles */
 @media (max-width: 768px) {
   .menu-toggle {
     display: flex; 
@@ -787,6 +830,6 @@ footer {
     padding: 15px 0;
     border-bottom: 1px solid #eee;
     width: 100%;
-    margin-left: 0; /* Reset margen lateral en móvil */
+    margin-left: 0;
   }
 }
