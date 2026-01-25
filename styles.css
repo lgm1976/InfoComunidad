@@ -183,8 +183,19 @@ nav a.active {
   color: var(--border);
   position: absolute;
   top: -20px;
-  left: -10px;
-  opacity: 0.5;
+  left: -30px;
+  opacity: 0.8;
+}
+
+.review-text::after {
+  content: '“';
+  font-family: serif;
+  font-size: 3rem;
+  color: var(--border);
+  position: absolute;
+  top: -20px;
+  left: 275px;
+  opacity: 0.8;
 }
 
 .review-author {
