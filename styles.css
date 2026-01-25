@@ -1,0 +1,767 @@
+/* =========================================================
+   VARIABLES GLOBALES
+   ========================================================= */
+
+:root {
+  --primary: #5b0f1a;
+  --secondary: #8c1d2a;
+  --accent: #b8323a;
+  --light: #fdf6f7;
+  --border: #ead4d7;
+  --text: #2b1c1e;
+  --muted: #7a5a5f;
+  --radius: 8px;
+}
+
+/* =========================================================
+   RESET / BASE
+   ========================================================= */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Lato', system-ui, -apple-system, BlinkMacSystemFont,
+               "Segoe UI", Roboto, Ubuntu, sans-serif;
+  color: var(--text);
+  background: #ffffff;
+  line-height: 1.6;
+  padding-top: 67px; /* header fijo */
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+h1 {
+  color: var(--primary);
+  font-size: 2.2rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+h2 {
+  color: var(--secondary);
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 25px;
+}
+
+/* =========================================================
+   LAYOUT GLOBAL
+   ========================================================= */
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.section {
+  padding: 96px 0;
+}
+
+.center {
+  text-align: center;
+}
+
+/* =========================================================
+   HEADER / NAV
+   ========================================================= */
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 50;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+}
+
+.header-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+}
+
+nav a {
+  margin-left: 32px;
+  font-size: 14px;
+  color: #374151;
+}
+
+nav a:hover {
+  color: var(--accent);
+}
+
+nav a.active {
+  color: var(--secondary);
+  font-weight: 700;
+}
+
+/* =========================================================
+   COMPONENTES REUTILIZABLES
+   ========================================================= */
+
+/* Botones */
+.btn {
+  display: inline-block;
+  padding: 14px 28px;
+  border-radius: var(--radius);
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+
+.btn-primary {
+  background: var(--secondary);
+  color: #ffffff;
+}
+
+.btn-primary:hover {
+  background: var(--primary);
+  transform: translateY(-1px);
+}
+
+.btn-outline {
+  background: #ffffff;
+  color: var(--muted);
+  border: 1px solid var(--border);
+}
+
+.btn-outline:hover {
+  background: var(--light);
+}
+
+/* Cards */
+.card {
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  display: block; /* Importante: quitamos el flex que rompe el carrusel */
+  width: auto;    /* Deja que el carrusel maneje el ancho */
+}
+
+/* Efecto Hover */
+.card:hover {
+  transform: translateY(-5px);
+  border-color: var(--accent);
+  box-shadow: 0 10px 20px rgba(91, 15, 26, 0.1);
+}
+
+.carousel-viewport {
+  overflow: hidden;
+  width: 100%;
+  padding: 20px 0;
+  position: relative;
+}
+
+/* El carril (el tren) */
+.carousel-track {
+  display: flex;
+  transition: transform .4s ease;
+  /* IMPORTANTE: gap 0 porque el JS ya cuenta el ancho total del item */
+  gap: 0; 
+}
+
+/* Cada tarjeta (el vagón) */
+.carousel-item {
+  /* En PC: 3 tarjetas exactas */
+  flex: 0 0 33.333333%;
+  width: 33.333333%;
+  box-sizing: border-box;
+  padding: 0 15px; /* Aquí creamos el espacio visual entre tarjetas */
+}
+
+/* En Móvil: 1 tarjeta completa */
+@media (max-width: 767px) {
+  .carousel-item {
+    flex: 0 0 100%;
+    width: 100%;
+  }
+}
+
+/* La tarjeta blanca interior */
+.carousel-item .card {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  background: #fff;
+  border: 1px solid var(--border);
+  display: block; 
+}
+
+/* Botones de navegación del carrusel */
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: white;
+    color: var(--primary);
+    border: 1px solid var(--border);
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10;
+
+    /* ALINEACIÓN FLEXBOX */
+    display: flex;
+    align-items: center;      /* Centrado vertical */
+    justify-content: center;   /* Centrado horizontal */
+    
+    /* TRUCO PARA EL SÍMBOLO */
+    font-size: 1.8rem;         /* Un poco más grande para que se vea mejor */
+    line-height: 0;            /* Anula la altura de línea tipográfica */
+    padding-bottom: 4px;       /* Empuja el símbolo hacia arriba para compensar su caída */
+    
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+/* Posicionamiento específico */
+.carousel-btn.prev {
+    left: -22px; /* Sobresale un poco a la izquierda */
+}
+
+.carousel-btn.next {
+    right: -22px; /* Sobresale un poco a la derecha */
+}
+
+/* Efectos al pasar el ratón */
+.carousel-btn:hover {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+    box-shadow: 0 6px 15px rgba(91, 15, 26, 0.3);
+    transform: translateY(-50%) scale(1.1);
+}
+
+/* Ajuste para que el contenedor del carrusel no corte los botones */
+.services-carousel {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px; /* Espacio para que los botones respiren */
+}
+.card-icon i {
+  font-size: 2.5rem;
+  color: var(--primary);
+  margin-bottom: 15px;
+  display: inline-block;
+}
+
+.card strong {
+  display: block;
+  margin: 10px 0;
+  font-size: 1.1rem;
+  color: var(--secondary);
+}
+
+/* Grids */
+.grid {
+  display: grid;
+  gap: 32px;
+}
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.grid-3 {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+@media (max-width: 600px) {
+  .grid-2,
+  .grid-4 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Formularios */
+.field {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 8px;
+  font-size: 0.85rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: inherit;
+}
+
+/* Elimina las líneas grises feas de los fieldset */
+fieldset {
+  border: none;
+  padding: 0;
+  margin-bottom: 30px; /* Separación entre el grupo 1 y el grupo 2 */
+}
+
+/* Mejora los títulos de cada sección (Elementos Comunes / Servicios) */
+legend {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--primary);
+  margin-bottom: 20px; /* Más espacio hacia abajo */
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  display: block; /* Cambiado de float a block */
+  width: 100%;
+  padding-top: 10px;
+}
+
+/* Mejora de la interacción en los campos */
+input, select, textarea {
+  transition: all 0.3s ease; /* Esto hace que los cambios no sean bruscos */
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--secondary);
+  box-shadow: 0 5px 15px rgba(91, 15, 26, 0.1); /* Sombra suave hacia abajo */
+  transform: translateY(-1px); /* El campo parece "elevarse" un poco */
+}
+
+/* Efecto al pasar el ratón por el botón de Continuar */
+.btn-primary:hover {
+  background: var(--primary);
+  transform: translateY(-2px); /* Se eleva un poco más */
+  box-shadow: 0 8px 20px rgba(140, 29, 42, 0.3); /* Sombra más marcada */
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+footer {
+  background: var(--primary);
+  color: rgba(255, 255, 255, 0.6);
+  padding: 48px 0;
+  text-align: center;
+  font-size: 14px;
+}
+
+/* =========================================================
+   PÁGINA HOME (INDEX)
+   ========================================================= */
+
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #ffffff;
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(91, 15, 26, 0.8),
+      rgba(91, 15, 26, 0.65)
+    ),
+    url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1920&q=80')
+    center / cover no-repeat;
+}
+
+.hero h1 {
+  font-size: clamp(2.6rem, 5vw, 4rem);
+  color: #ffffff;
+  margin-bottom: 24px;
+}
+
+.hero p {
+  max-width: 620px;
+  margin: 0 auto 40px;
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* =========================================================
+   PÁGINA COTIZADOR
+   ========================================================= */
+
+.container-narrow {
+  max-width: 850px;
+  margin: 0 auto;
+  padding: 40px 24px;
+}
+
+.hero-cotizador {
+  background: var(--light);
+  text-align: center;
+  padding: 30px 24px;
+}
+
+.card-form {
+  background: #ffffff;
+  padding: 40px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 20px rgba(91, 15, 26, 0.08);
+  margin-top: -30px;
+}
+
+/* Steps */
+.step {
+  display: none;
+}
+
+.step.active {
+  display: block;
+  animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* El contenedor gris (la base) */
+.progress-bar {
+    background: #eee;
+    height: 8px;
+    border-radius: 10px;
+    margin: 30px 0 40px 0;
+    position: relative;
+    width: 100%;
+    overflow: visible; /* Para que el porcentaje se vea por encima */
+}
+
+/* El relleno granate (lo que se mueve) */
+.progress-fill {
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    height: 100%;
+    width: 0%; /* Empezará en 0% */
+    border-radius: 10px;
+    transition: width 0.5s ease;
+    position: relative;
+}
+
+/* El porcentaje flotante sobre la barra */
+.progress-fill::after {
+    content: attr(data-progress);
+    position: absolute;
+    right: 0;
+    top: -25px;
+    font-size: 12px;
+    font-weight: bold;
+    color: var(--primary);
+    background: white;
+    padding: 2px 6px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    white-space: nowrap;
+}
+
+/* Mejora de los servicios (Paso 4) */
+.check-item {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border: 1px solid var(--border);
+  padding: 15px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  text-transform: none;
+  color: var(--text);
+  margin: 0; 
+  width: 100%; 
+}
+
+/* Cuando pasamos el ratón por encima */
+.check-item:hover {
+  background: var(--light);
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+/* Estilo para el cuadradito del check */
+.check-item input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  margin-right: 12px;
+  accent-color: var(--secondary); /* Color del check cuando se marca */
+}
+
+/* Efecto visual cuando la casilla está marcada */
+.check-item:has(input:checked) {
+  background: var(--light);
+  border-color: var(--secondary);
+  box-shadow: 0 4px 10px rgba(91, 15, 26, 0.1);
+}
+
+#step-4 .grid-2 {
+  gap: 15px !important; /* Fuerza el espacio entre las tarjetas */
+  margin-bottom: 20px;
+}
+
+/* =========================================================
+   MODAL LEGAL (GLOBAL)
+   ========================================================= */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: none;                 /* clave */
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+}
+
+.modal-content {
+  background: #ffffff;
+  width: 90%;
+  max-width: 700px;
+  max-height: 85vh;
+  border-radius: var(--radius);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
+}
+
+.modal-header {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-body {
+  padding: 20px;
+  overflow-y: auto;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.modal-body h3 {
+  margin-top: 20px;
+  margin-bottom: 6px;
+  font-size: 0.95rem;
+  color: var(--primary);
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  font-size: 1.6rem;
+  cursor: pointer;
+  color: var(--muted);
+}
+
+.modal-close:hover {
+  color: var(--accent);
+}
+
+/* =========================================================
+   LEGAL CONSENT (alineado correctamente)
+   ========================================================= */
+
+.legal-consent {
+  display: flex;
+  align-items: center; /* Alineación vertical perfecta */
+  gap: 12px;
+  margin: 10px 0;
+  text-align: left;
+}
+
+.legal-consent input[type="checkbox"] {
+  width: auto;      /* IMPORTANTE: anula el width: 100% general */
+  margin: 0;        /* quita márgenes extra */
+  cursor: pointer;
+  transform: scale(1.2); /* Opcional: hace el check un pelín más grande */
+}
+
+.legal-text {
+  font-size: 0.9rem;
+  color: var(--text);
+  cursor: default;
+  text-transform: none; /* Evita que se ponga en mayúsculas si el label general lo hace */
+  letter-spacing: normal;
+  margin-bottom: 0;    /* Quita el margen inferior de los labels generales */
+}
+
+.legal-link:hover {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+/* =========================================================
+   ACTIONS (botoneras)
+   ========================================================= */
+
+.actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  gap: 12px;
+}
+
+/* =========================================
+   SECCIÓN UBICACIÓN (GRID SYSTEM)
+   ========================================= */
+
+.location-grid {
+    display: grid;
+    /* En PC: Columna izquierda de 300px y el resto para el mapa */
+    grid-template-columns: 300px 1fr; 
+    gap: 20px;
+    align-items: stretch; /* Estira ambas columnas para que midan lo mismo de alto */
+}
+
+/* Contenedor de las 3 tarjetitas de la izquierda */
+.location-cards {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Reparte el espacio verticalmente */
+    gap: 20px;
+}
+
+/* Ajuste específico para las tarjetas de ubicación */
+.location-cards .card {
+    /* Nos aseguramos de que no hereden cosas raras del carrusel */
+    width: 100%; 
+    flex: 1; /* Para que se repartan la altura disponible si hiciera falta */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Texto centrado verticalmente */
+}
+
+/* Ajuste específico para la tarjeta del mapa */
+.map-card {
+    width: 100%;
+    height: 100%; /* Ocupa toda la altura de la cuadrícula */
+    padding: 0; /* Opcional: Quita el padding si quieres el mapa de borde a borde */
+    overflow: hidden;
+    min-height: 400px; /* Altura mínima para que no desaparezca */
+    display: flex;
+}
+
+.map-card iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+}
+
+/* =========================================
+   RESPONSIVE (MÓVIL)
+   ========================================= */
+@media (max-width: 768px) {
+    .location-grid {
+        grid-template-columns: 1fr; /* Una sola columna */
+    }
+    
+    .map-card {
+        height: 300px; /* Altura fija en móvil */
+    }
+}
+
+/* =========================================================
+   VARIANTE SECCIÓN OSCURA (NOSOTROS)
+   ========================================================= */
+
+.section.dark {
+  background-color: var(--primary); /* El color granate definido en :root */
+  color: #ffffff;
+}
+
+/* Forzamos a que el título y el texto dentro de la sección oscura sean blancos */
+.section.dark h2,
+.section.dark .about-title,
+.section.dark .about-text {
+  color: #ffffff;
+}
+
+.hero, 
+.hero-cotizador {
+  margin-top: 0 !important;
+  border-top: 1px solid transparent; /* Truco técnico para evitar colapso de márgenes */
+}
+
+/* En el cotizador, el h1 podría estar empujando hacia arriba */
+.hero-cotizador h1 {
+  margin-top: 0;
+}
+
+/* Contenedor para centrar contenido en pasos finales */
+.step-center {
+    text-align: center;
+    padding: 20px 0;
+}
+
+/* Estilo para el bloque del precio */
+.precio-container {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px 0;
+    color: var(--primary);
+}
+
+#precioMensual {
+    font-size: 3.5rem; /* Tamaño grande para el número */
+    font-weight: 800;
+    line-height: 1;
+}
+
+.moneda-mes {
+    font-size: 1.5rem; /* Tamaño proporcional para el texto €/mes */
+    font-weight: 600;
+    color: var(--muted);
+}
+
+/* Icono de éxito final */
+.success-icon {
+    font-size: 4rem;
+    color: #28a745;
+    margin-bottom: 20px;
+}

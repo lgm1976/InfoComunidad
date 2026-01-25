@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Servicio Informativo para Comunidades · Web Demo</title>
+
+  <!-- ESTILO CSS -->
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- GOOGLE FONT · LATO -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- FLAT ICONS -->
+  <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-regular-chubby/css/uicons-regular-chubby.css'>
+  <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
+  <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-regular-straight/css/uicons-regular-straight.css'>
+
+</head>
+<body>
+
+<header>
+  <div class="container header-inner">
+    <a href="index.html"><strong>Comunidad Info</strong></a>
+    <nav>
+      <a href="#servicios">Servicios</a>
+      <a href="#nosotros">Nosotros</a>
+      <a href="#resenas">Reseñas</a>
+      <a href="#ubicacion">Ubicación</a>
+      <a href="#contacto">Contacto</a>
+      <a href="cotizador.html">Presupuesto Online</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container">
+    <h1>Información y asesoramiento<br><span>para comunidades de propietarios</span></h1>
+    <p>Un servicio independiente para entender la gestión, la normativa y los procesos habituales en las comunidades de propietarios y tomar mejores decisiones.</p>
+    <a href="cotizador.html" class="btn btn-primary">Cotización Online</a>
+  </div>
+</section>
+
+<section id="servicios" class="section" style="background-color: #f8f9fa;">
+  <div class="container center">
+    <h2>Qué ofrecemos</h2>
+
+    <div class="services-carousel" aria-label="Carrusel de servicios">
+      <button class="carousel-btn prev" aria-label="Anterior">&lsaquo;</button>
+
+      <div class="carousel-viewport">
+        <div class="carousel-track">
+          <div class="carousel-item">
+            <div class="card center">
+              <div class="card-icon">
+                <i class="fi fi-rc-gavel"></i>
+              </div>
+              <strong>Información legal y normativa</strong>
+              <p>Explicamos la normativa de propiedad horizontal, el funcionamiento de las juntas y los derechos y obligaciones de los propietarios.</p>
+            </div>
+          </div>
+
+          <div class="carousel-item">
+            <div class="card center">
+              <div class="card-icon">
+                <i class="fi fi-rr-transaction-euro"></i>
+              </div>
+              <strong>Presupuestos y cuentas explicados</strong>
+              <p>Ayudamos a entender presupuestos, liquidaciones, derramas y gastos habituales de una comunidad.</p>
+            </div>
+          </div>
+
+          <div class="carousel-item">
+            <div class="card center">
+              <div class="card-icon">
+                <i class="fi fi-rr-paint-roller"></i>
+              </div>
+              <strong>Mantenimiento y obras</strong>
+              <p>Orientación sobre reparaciones, mantenimiento preventivo, obras comunes e inspecciones técnicas.</p>
+            </div>
+          </div>
+
+          <div class="carousel-item">
+            <div class="card center">
+              <div class="card-icon">
+                <i class="fi fi-rs-user-helmet-safety"></i>
+              </div>
+              <strong>Personal de la finca</strong>
+              <p>Información sobre funciones, costes y obligaciones relacionadas con porteros, conserjes y personal contratado.</p>
+            </div>
+          </div>
+
+          <div class="carousel-item">
+            <div class="card center">
+              <div class="card-icon">
+                <i class="fi fi-rs-supplier-alt"></i>
+              </div>
+              <strong>Proveedores y servicios</strong>
+              <p>Claves para contratar y supervisar servicios como limpieza, ascensores, jardinería o seguridad.</p>
+            </div>
+          </div>
+
+          <div class="carousel-item">
+            <div class="card center">
+              <div class="card-icon">
+                <i class="fi fi-rs-call-history"></i>
+              </div>
+              <strong>Atención y comunicación</strong>
+              <p>Buenas prácticas para la comunicación interna, gestión de incidencias y resolución de conflictos.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button class="carousel-btn next" aria-label="Siguiente">&rsaquo;</button>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    const track = document.querySelector('.carousel-track');
+    const items = Array.from(document.querySelectorAll('.carousel-item'));
+    const prev = document.querySelector('.carousel-btn.prev');
+    const next = document.querySelector('.carousel-btn.next');
+
+    const visible = window.innerWidth < 768 ? 1 : 3;
+    const gap = 0;                    // gap en px (CSS)
+    let index = 0;
+
+    // Clonamos para efecto rueda (zoótropo)
+    const clonesBefore = items.slice(-visible).map(el => el.cloneNode(true));
+    const clonesAfter  = items.slice(0, visible).map(el => el.cloneNode(true));
+
+    clonesBefore.forEach(clone => track.prepend(clone));
+    clonesAfter.forEach(clone => track.append(clone));
+
+    const allItems = Array.from(track.children);
+
+    // Posición inicial real (después de clones iniciales)
+    index = visible;
+
+    function itemWidth() {
+      return allItems[0].offsetWidth;;
+    }
+
+    function move(animate = true) {
+      track.style.transition = animate ? 'transform .4s ease' : 'none';
+      track.style.transform = `translateX(-${index * itemWidth()}px)`;
+    }
+
+    // Posición inicial sin animación
+    move(false);
+
+    next.addEventListener('click', () => {
+      index++;
+      move(true);
+
+      if (index === allItems.length - visible) {
+        setTimeout(() => {
+          index = visible;
+          move(false);
+        }, 400);
+      }
+    });
+
+    prev.addEventListener('click', () => {
+      index--;
+      move(true);
+
+      if (index === 0) {
+        setTimeout(() => {
+          index = allItems.length - (visible * 2);
+          move(false);
+        }, 400);
+      }
+    });
+
+    window.addEventListener('resize', () => move(false));
+  })();
+</script>
+
+<section id="nosotros" class="section dark">
+  <div class="container center">
+    <h2 class="about-title">
+      Más de 20 años de experiencia
+    </h2>
+    <p class="about-text">
+      Conocemos en profundidad el funcionamiento de las comunidades de propietarios y ponemos 
+      esa experiencia al servicio de quienes necesitan información clara, criterio y orientación.
+    </p>
+  </div>
+</section>
+
+<section id="resenas" class="section" style="background:#f8fafc">
+  <div class="container center">
+    <h2>Opiniones sobre el servicio</h2>
+    <div class="grid grid-3" style="margin-top:64px">
+
+      <div class="card">
+        <div class="rating" aria-label="Puntuación 5 de 5">★★★★★</div>
+        <div class="score">5/5</div>
+        <p class="review-text">
+          La información y las explicaciones nos ayudaron a entender mejor las cuentas y tomar decisiones
+           con criterio en la junta.</p>
+        <div class="review-author">María G.</div>
+        <div class="review-role">Presidenta de comunidad</div>
+      </div>
+
+      <div class="card">
+        <div class="rating" aria-label="Puntuación 4 de 5">★★★★☆</div>
+        <div class="score">4/5</div>
+        <p class="review-text">
+          Servicio claro y cercano. Resolvieron nuestras dudas antes de tomar decisiones
+           importantes en la comunidad.</p>
+        <div class="review-author">Antonio L.</div>
+        <div class="review-role">Propietario</div>
+      </div>
+
+      <div class="card">
+        <div class="rating" aria-label="Puntuación 5 de 5">★★★★★</div>
+        <div class="score">5/5</div>
+        <p class="review-text">
+          Como profesional externo, agradezco la claridad con la que explican
+           procesos y responsabilidades.</p>
+        <div class="review-author">Carlos R.</div>
+        <div class="review-role">Proveedor de mantenimiento</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="ubicacion" class="section">
+  <div class="container">
+    <div class="center">
+      <h2>Ubicación</h2>
+      <p>Ubicados en pleno centro de Vallecas, con excelente comunicación para atenderle de forma ágil y cercana.</p>
+    </div>
+
+    <div class="location-grid" style="margin-top:48px">
+      <!-- Columna tarjetas (alineadas exactamente al alto del mapa) -->
+      <div class="location-cards">
+        <div class="card">
+          <strong>Dirección</strong>
+          <p>Avenida de La Albufera 9<br>Madrid</p>
+        </div>
+        <div class="card">
+          <strong>Teléfono</strong>
+          <p>91 000 00 00</p>
+        </div>
+        <div class="card">
+          <strong>Correo electrónico</strong>
+          <p>info@fincasdemo.es</p>
+        </div>
+      </div>
+
+      <!-- Mapa -->
+      <div class="card map-card">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d24313.143767041023!2d-3.6763284536012275!3d40.38352381242378!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd4225d0994ed505%3A0x41cc0ff30381931!2sPuente%20de%20Vallecas%2C%20Madrid!5e0!3m2!1ses!2ses!4v1769339347495!5m2!1ses!2ses" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contacto" class="section" style="background:#f8fafc">
+  <div class="container center">
+    <h2>Contacto e información</h2>
+    
+    <form class="card" style="max-width:500px;margin:48px auto 0">
+      <input type="text" placeholder="Nombre" style="width:100%;margin-bottom:16px;padding:12px">
+      <input type="email" placeholder="Email" style="width:100%;margin-bottom:16px;padding:12px">
+      <textarea placeholder="Mensaje" style="width:100%;height:120px;padding:12px"></textarea>
+      <button class="btn btn-primary" style="margin-top:24px">Enviar</button>
+    </form>
+    <p class="legal-note" style="max-width:520px;margin:16px auto 0;font-size:13px;color:#6b4a4f;">
+      La información facilitada a través de este formulario será tratada únicamente para gestionar su 
+      consulta y contactar con usted en relación con los servicios solicitados. No se utilizará para 
+      otros fines ni se cederá a terceros.
+    </p>
+  </div>
+</section>
+
+<footer>
+  © 2026 · Servicio Informativo para Comunidades · Demo
+</footer>
+
+</body>
+</html>

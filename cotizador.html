@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Presupuesto Online · Comunidad Info</title>
+
+  <!-- ESTILO CSS -->
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- GOOGLE FONT · LATO -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- FLAT ICONS -->
+  <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
+
+</head>
+<body>
+
+  <!-- LEGAL MODAL -->
+  <div class="modal-overlay" id="legalModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 style="font-size: 1.2rem;">Política de Privacidad y Protección de Datos</h2>
+        <button class="modal-close" onclick="closeModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>En cumplimiento del Reglamento General de Protección de Datos (RGPD) y la LOPDGDD, le informamos detalladamente sobre el tratamiento de sus datos:</p>
+        
+        <h3>1. Responsable del Tratamiento</h3>
+        <p>El responsable de los datos recogidos en este formulario es <strong>Luis González Moreno</strong>, con correo electrónico de contacto <a href="mailto:luis.gonzalezm@gmail.com" style="color:var(--accent)">luis.gonzalezm@gmail.com</a>.</p>
+        
+        <h3>2. Finalidad y Legitimación</h3>
+        <p>La finalidad del tratamiento de sus datos es el cálculo de un presupuesto orientativo de administración de fincas y la gestión de su solicitud de contacto para dicho servicio. La base legal que legitima este tratamiento es su consentimiento expreso, otorgado al marcar la casilla de aceptación y enviar el formulario.</p>
+        
+        <h3>3. Cesión de datos a terceros</h3>
+        <p>Para que usted reciba la oferta personalizada solicitada, sus datos de contacto y las características de su finca <strong>serán cedidos a administradores de fincas profesionales o empresas de gestión de comunidades</strong> interesados en prestarle sus servicios. Una vez recibida la información, dichos terceros actuarán como responsables independientes del tratamiento de acuerdo a sus propias políticas de privacidad.</p>
+        
+        <h3>4. Almacenamiento y Conservación</h3>
+        <p>Los datos son procesados y almacenados a través de la plataforma <strong>Google Workspace (Google Forms)</strong>, lo cual puede implicar transferencias internacionales de datos protegidas por las Cláusulas Contractuales Tipo de la Comisión Europea. Sus datos se conservarán únicamente durante el tiempo necesario para gestionar su solicitud de presupuesto o hasta que usted solicite su supresión.</p>
+        
+        <h3>5. Sus Derechos</h3>
+        <p>Usted puede ejercer en cualquier momento sus derechos de acceso, rectificación, supresión, limitación y oposición. Para ello, debe enviar un correo electrónico a <a href="mailto:luis.gonzalezm@gmail.com" style="color:var(--accent)">luis.gonzalezm@gmail.com</a> indicando el derecho que desea ejercer. Asimismo, si considera que sus datos no están siendo tratados correctamente, tiene derecho a presentar una reclamación ante la Agencia Española de Protección de Datos (AEPD).</p>
+      </div>
+      <div class="actions">
+        <button class="btn btn-primary" onclick="closeModal()">Cerrar y aceptar</button>
+      </div>
+    </div>
+  </div>
+
+  <header>
+  <div class="container header-inner">
+    <a href="index.html"><strong>Comunidad Info</strong></a>
+    <nav>
+      <a href="index.html#servicios">Servicios</a>
+      <a href="index.html#nosotros">Nosotros</a>
+      <a href="index.html#resenas">Reseñas</a>
+      <a href="index.html#ubicacion">Ubicación</a>
+      <a href="index.html#contacto">Contacto</a>
+      <a href="cotizador.html" class="active">Presupuesto Online</a>
+    </nav>
+  </div>
+</header>
+
+  <section class="hero-cotizador">
+    <div class="container-narrow">
+      <h1>Calculadora de Cuotas</h1>
+      <p>Obtenga una estimación inmediata del coste de administración para su finca.</p>
+    </div>
+  </section>
+
+  <div class="container-narrow">
+    <div class="progress-bar">
+    <div class="progress-fill" id="progress" data-progress="0%"></div>
+</div>
+    
+    <div class="card-form">
+      <form id="cotizadorForm">
+        
+        <!-- STEP 1: CONTACT -->
+        <div class="step active" id="step-1">
+          <h2>1. Datos de contacto</h2>
+          <div class="grid-2">
+            <div class="field"><label>Nombre</label><input type="text" id="nombre" required></div>
+            <div class="field"><label>Apellidos</label><input type="text" id="apellidos" required></div>
+          </div>
+          <div class="grid-2">
+            <div class="field"><label>Teléfono</label><input type="tel" id="telefono" required></div>
+            <div class="field"><label>Email</label><input type="email" id="email" required></div>
+          </div>
+          
+          <div class="legal-consent">
+  <input type="checkbox" id="legal_consent" required>
+  <label for="legal_consent" class="legal-text">
+    Acepto la <span class="legal-link" onclick="openModal()" style="color: var(--accent); cursor: pointer; text-decoration: underline;">Política de Privacidad y Protección de Datos</span>.
+  </label>
+</div>
+
+          <div class="actions">
+            <button type="button" class="btn btn-primary" onclick="validarPaso1()">Continuar</button>
+          </div>
+        </div>
+
+        <!-- STEP 2: LOCATION -->
+        <div class="step" id="step-2">
+          <h2>2. Ubicación de la Finca</h2>
+          <div class="field">
+            <label>Dirección del Edificio</label>
+            <input type="text" id="direccion" placeholder="Escriba la calle y número..." required>
+            <div id="map" style="width: 100%; height: 300px; margin-top: 20px; border-radius: 8px; display: none;"></div>
+            <div id="map"></div>
+          </div>
+          <div class="grid-2">
+            <div class="field"><label>Año Construcción</label><input type="number" id="anoConstruccion" value="2000"></div>
+            <div class="field">
+              <label>Necesidad principal / Situación</label>
+              <select id="motivo">
+                <option value="Información general">Información general</option>
+                <option value="Ahorro de costes">Reducción de gastos</option>
+                <option value="Mejora de transparencia">Transparencia en cuentas</option>
+                <option value="Problemas técnicos">Gestión de obras</option>
+                <option value="Comunidad sin administrador">Comunidad sin administrador (Autogestión)</option>
+              </select>
+            </div>
+          </div>
+          <div class="actions">
+            <button type="button" class="btn btn-outline" onclick="irAlPaso(1)">Atrás</button>
+            <button type="button" class="btn btn-primary" onclick="irAlPaso(3)">Siguiente</button>
+          </div>
+        </div>
+
+        <!-- STEP 3: SIZE -->
+        <div class="step" id="step-3">
+          <h2>3. Tamaño de la Comunidad</h2>
+          <div class="grid-4">
+            <div class="field"><label>Viviendas</label><input type="number" id="viviendas" value="10"></div>
+            <div class="field"><label>Portales</label><input type="number" id="portales" value="1"></div>
+            <div class="field"><label>Plantas</label><input type="number" id="plantas" value="3"></div>
+            <div class="field"><label>Ascensores</label><input type="number" id="ascensores" value="1"></div>
+          </div>
+          <div class="grid-4">
+            <div class="field"><label>Garajes</label><input type="number" id="garajes" value="0"></div>
+            <div class="field"><label>Locales</label><input type="number" id="locales" value="0"></div>
+            <div class="field"><label>Trasteros</label><input type="number" id="trasteros" value="0"></div>
+            <div class="field"><label>Salas Com.</label><input type="number" id="salasComunes" value="0"></div>
+          </div>
+          <div class="actions">
+            <button type="button" class="btn btn-outline" onclick="irAlPaso(2)">Atrás</button>
+            <button type="button" class="btn btn-primary" onclick="irAlPaso(4)">Siguiente</button>
+          </div>
+        </div>
+
+        <!-- STEP 4: SERVICES -->
+        <div class="step" id="step-4">
+          <h2>4. Instalaciones y Servicios</h2>
+          <fieldset>
+            <legend>Elementos Comunes</legend>
+            <div class="grid-2" style="gap: 10px;">
+                <label class="check-item"><input type="checkbox" id="piscina"> Piscina Comunitaria</label>
+                <label class="check-item"><input type="checkbox" id="jardines"> Zonas Ajardinadas</label>
+                <label class="check-item"><input type="checkbox" id="calefaccionCentral"> Calefacción / ACS Central</label>
+                <label class="check-item"><input type="checkbox" id="placasSolares"> Energía Solar</label>
+                <label class="check-item"><input type="checkbox" id="garajesPCI"> Garajes con PCI / Ventilación</label>
+                <label class="check-item"><input type="checkbox" id="videoportero"> Videoportero / Control de accesos</label>
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend>Servicios Actuales</legend>
+            <div class="grid-2" style="gap: 10px;">
+                <label class="check-item"><input type="checkbox" id="limpieza"> Servicio de Limpieza</label>
+                <label class="check-item"><input type="checkbox" id="jardineria"> Mantenimiento Jardín</label>
+                <label class="check-item"><input type="checkbox" id="seguridad"> Conserjería / Seguridad</label>
+                <label class="check-item"><input type="checkbox" id="mantenimiento"> Mantenimiento Integral</label>
+            </div>
+          </fieldset>
+          <div class="actions">
+            <button type="button" class="btn btn-outline" onclick="irAlPaso(3)">Atrás</button>
+            <button type="button" class="btn btn-primary" onclick="calcularYMostrar()">Calcular Estimación</button>
+          </div>
+        </div>
+
+        <!-- STEP 5: RESULT -->
+        <div class="step" id="step-5">
+          <div class="step-center">
+            <h2>Estimación Mensual</h2>
+            <div class="step-center">
+            <span class="precio-tag" id="precioMensual">0</span>
+            <span style="font-size: 1.5rem; color: var(--primary); font-weight: 700;"> € / mes</span>
+            <p style="margin-top: 10px; font-size: 0.9rem; color: var(--muted)">(Honorarios aproximados de administración)</p>
+          </div>
+          <div class="actions">
+            <button type="button" class="btn btn-outline" onclick="irAlPaso(4)">Atrás</button>
+            <button type="button" class="btn btn-primary" onclick="enviarAGoogleForms()" id="btnEnviar">Finalizar</button>
+          </div>
+          </div>
+        </div>
+
+        <!-- STEP 6: SUCCESS -->
+        <div class="step" id="step-6">
+            <div class="step-center">
+                <div class="success-icon"><i class="fi fi-rr-check"></i></div>
+                <h2 style="margin-bottom: 10px;">¡Solicitud enviada con éxito!</h2>
+                <p style="color: var(--muted); max-width: 480px; margin: 0 auto 30px;">
+                    Tenga en cuenta que la valoración facilitada es <strong>meramente orientativa</strong>. El precio definitivo se determinará tras una entrevista personalizada con un administrador para conocer los detalles específicos de su comunidad.
+                </p>
+                <div class="actions">
+                    <a href="index.html" class="btn btn-primary" style="text-decoration: none;">Volver al Inicio</a>
+                </div>
+            </div>
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+  <footer>
+    © 2026 · Comunidad Info · Servicio Informativo para Comunidades
+  </footer>
+
+  <script>
+    function gm_authFailure() { 
+      document.getElementById('api-warning-msg').style.display = 'block';
+      const dirInput = document.getElementById('direccion');
+      if(dirInput) dirInput.placeholder = "Escriba la dirección manualmente...";
+    }
+    
+    // MODAL CONTROL
+    function openModal() {
+      document.getElementById('legalModal').style.display = 'flex';
+    }
+    function closeModal() {
+      document.getElementById('legalModal').style.display = 'none';
+    }
+    // Close modal if clicking outside
+    window.onclick = function(event) {
+      const modal = document.getElementById('legalModal');
+      if (event.target == modal) {
+        closeModal();
+      }
+    }
+  </script>
+
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAB6_6mz_TzxBl-bFTBOxKgfy0M5FPqIOI&libraries=places&callback=initAutocomplete" async defer></script>
+
+  <script>
+    let autocomplete, map, marker;
+    let direccionSeleccionada = {
+      direccionCompleta: "", calle: "", numero: "", ciudad: "", provincia: "", codigoPostal: ""
+    };
+
+    // 1. Inicialización de Google Maps
+    function initAutocomplete() {
+      const input = document.getElementById('direccion');
+      if (!input || typeof google === 'undefined') return;
+
+      try {
+        autocomplete = new google.maps.places.Autocomplete(input, {
+          componentRestrictions: { country: "es" },
+          fields: ["address_components", "geometry", "formatted_address"],
+          types: ["address"]
+        });
+
+        autocomplete.addListener('place_changed', () => {
+          const place = autocomplete.getPlace();
+          if (!place.geometry) return;
+
+          direccionSeleccionada.direccionCompleta = place.formatted_address;
+          place.address_components.forEach(c => {
+            const type = c.types[0];
+            if (type === "route") direccionSeleccionada.calle = c.long_name;
+            if (type === "street_number") direccionSeleccionada.numero = c.long_name;
+            if (type === "locality") direccionSeleccionada.ciudad = c.long_name;
+            if (type === "administrative_area_level_2") direccionSeleccionada.provincia = c.long_name;
+            if (type === "postal_code") direccionSeleccionada.codigoPostal = c.long_name;
+          });
+
+          const mapDiv = document.getElementById('map');
+          mapDiv.style.display = 'block';
+          if (!map) {
+            map = new google.maps.Map(mapDiv, { zoom: 17, center: place.geometry.location, disableDefaultUI: true });
+            marker = new google.maps.Marker({ map: map });
+          }
+          map.setCenter(place.geometry.location);
+          marker.setPosition(place.geometry.location);
+        });
+      } catch (e) {
+        console.warn("Autocompletado no disponible.");
+      }
+    }
+
+    // 2. FUNCIÓN MAESTRA DE NAVEGACIÓN (Corregida para despertar el mapa)
+    function irAlPaso(n) {
+      const steps = document.querySelectorAll('.step');
+      const progressFill = document.getElementById('progress');
+      
+      // Ocultar todos los pasos y mostrar el actual
+      steps.forEach(s => s.classList.remove('active'));
+      const nextStep = document.getElementById('step-' + n);
+      if (nextStep) nextStep.classList.add('active');
+
+      // Actualizar Barra de Progreso y el % flotante
+      if (progressFill) {
+        const totalSteps = steps.length;
+        const percent = Math.round(((n - 1) / (totalSteps - 1)) * 100);
+        
+        progressFill.style.width = percent + '%';
+        progressFill.setAttribute('data-progress', percent + '%');
+      }
+
+      // --- ESTO ES LO QUE ARREGLA EL MAPA ---
+      // Si entramos al paso 2 y el mapa ya existe, hay que forzar a Google a dibujarlo
+      if (n === 2 && map) {
+        setTimeout(() => {
+          google.maps.event.trigger(map, "resize");
+          if (marker) map.setCenter(marker.getPosition());
+        }, 100); // Pequeña pausa para que el paso sea visible primero
+      }
+      // --------------------------------------
+
+      window.scrollTo(0,0);
+    }
+
+    // 3. Validaciones y Lógica de Negocio
+    function validarPaso1() {
+      const nom = document.getElementById('nombre').value;
+      const ape = document.getElementById('apellidos').value;
+      const tel = document.getElementById('telefono').value;
+      const mail = document.getElementById('email').value;
+      const legal = document.getElementById('legal_consent').checked;
+
+      if(!nom || !ape || !tel || !mail) {
+        alert("Por favor, rellene todos los campos de contacto.");
+        return;
+      }
+      if(!legal) {
+        alert("Debe aceptar las bases legales y la cesión de datos para continuar.");
+        return;
+      }
+      irAlPaso(2);
+    }
+
+    function calcularYMostrar() {
+      const v = parseInt(document.getElementById('viviendas').value) || 0;
+      const portales = parseInt(document.getElementById('portales').value) || 0;
+      const asc = parseInt(document.getElementById('ascensores').value) || 0;
+      const ano = parseInt(document.getElementById('anoConstruccion').value) || 2000;
+      const motivo = document.getElementById('motivo').value;
+      
+      let total = 50; 
+      total += (v * 3); 
+      total += (portales * 10);
+      total += (asc * 12); 
+
+      if (ano < 1980) { total += 25; } 
+      else if (ano >= 1980 && ano <= 1999) { total += 15; }
+
+      if(document.getElementById('piscina').checked) total += 20;
+      if(document.getElementById('jardines').checked) total += 15;
+      if(document.getElementById('calefaccionCentral').checked) total += 20;
+      if(document.getElementById('placasSolares').checked) total += 10;
+      if(document.getElementById('garajesPCI').checked) total += 10;
+      if(document.getElementById('videoportero').checked) total += 8;
+
+      if(document.getElementById('limpieza').checked) total += 20;
+      if(document.getElementById('jardineria').checked) total += 15;
+      if(document.getElementById('seguridad').checked) total += 30;
+      if(document.getElementById('mantenimiento').checked) total += 25;
+
+      if(motivo === "Comunidad sin administrador") total += 15;
+
+      const totalRedondeado = Math.round(total / 5) * 5;
+      document.getElementById('precioMensual').innerText = totalRedondeado;
+      
+      irAlPaso(5); // Te lleva al paso de resultados
+    }
+
+    function enviarAGoogleForms() {
+      const btn = document.getElementById('btnEnviar');
+      btn.innerText = "Procesando...";
+      btn.disabled = true;
+
+      const dirTexto = document.getElementById('direccion').value;
+      const finalDireccion = direccionSeleccionada.direccionCompleta || dirTexto;
+
+      const formURL = "https://docs.google.com/forms/d/e/1FAIpQLSfgndZwqBTfmFR9rl0aU-wGmkgKA8e3UxIH4-rMI2G0Y63aVg/formResponse";
+      const fd = new FormData();
+
+      fd.append("entry.952121618", document.getElementById("email").value);
+      fd.append("entry.1865292917", document.getElementById("nombre").value);
+      fd.append("entry.234721920", document.getElementById("apellidos").value);
+      fd.append("entry.1100157545", document.getElementById("telefono").value);
+      fd.append("entry.846456656", finalDireccion);
+      fd.append("entry.106601160", direccionSeleccionada.calle || "N/A");
+      fd.append("entry.795617294", direccionSeleccionada.numero || "N/A");
+      fd.append("entry.53002704", direccionSeleccionada.ciudad || "N/A");
+      fd.append("entry.1394003358", direccionSeleccionada.provincia || "N/A");
+      fd.append("entry.773629670", direccionSeleccionada.codigoPostal || "N/A");
+      fd.append("entry.147545752", document.getElementById("viviendas").value);
+      fd.append("entry.1924463597", document.getElementById("portales").value);
+      fd.append("entry.564268766", document.getElementById("garajes").value);
+      fd.append("entry.2078929423", document.getElementById("locales").value);
+      fd.append("entry.584238427", document.getElementById("ascensores").value);
+      fd.append("entry.1975390158", document.getElementById("trasteros").value);
+      fd.append("entry.1163192818", document.getElementById("plantas").value);
+      fd.append("entry.596687529", document.getElementById("salasComunes").value);
+      fd.append("entry.727114152", document.getElementById("anoConstruccion").value);
+      fd.append("entry.405354445", document.getElementById("motivo").value);
+      fd.append("entry.1521186204", document.getElementById("piscina").checked ? "Sí" : "No");
+      fd.append("entry.1302898620", document.getElementById("jardines").checked ? "Sí" : "No");
+      fd.append("entry.628796887", document.getElementById("calefaccionCentral").checked ? "Sí" : "No");
+      fd.append("entry.98294061", document.getElementById("placasSolares").checked ? "Sí" : "No");
+      fd.append("entry.1775785756", document.getElementById("garajesPCI").checked ? "Sí" : "No");
+      fd.append("entry.652625492", document.getElementById("videoportero").checked ? "Sí" : "No");
+      fd.append("entry.1005326668", document.getElementById("limpieza").checked ? "Sí" : "No");
+      fd.append("entry.786662894", document.getElementById("jardineria").checked ? "Sí" : "No");
+      fd.append("entry.1734050686", document.getElementById("seguridad").checked ? "Sí" : "No");
+      fd.append("entry.1996415610", document.getElementById("mantenimiento").checked ? "Sí" : "No");
+      fd.append("entry.2113593166", document.getElementById("precioMensual").innerText + " €/mes");
+      fd.append("entry.507180921", "Consentimiento Aceptado");
+
+      fetch(formURL, { method: "POST", mode: "no-cors", body: fd })
+      .then(() => {
+        irAlPaso(6); // Paso final de agradecimiento
+      })
+      .catch(() => {
+        btn.disabled = false;
+        btn.innerText = "Error, reintentar";
+      });
+    }
+
+    // Inicializar el primer paso al cargar
+    irAlPaso(1);
+</script>
+
+</body>
+</html>
