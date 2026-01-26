@@ -1,29 +1,48 @@
 /*** InfoComunidad - JavaScript Centralizado v2.0  ***/
 
- document.addEventListener('DOMContentLoaded', () => {
-    loadHeader(); // <-- Llamamos a la función al cargar
-    loadFooter(); // <-- Llamamos a la función al cargar
+ // --- UN SOLO PUNTO DE INICIO ---
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. Cargamos componentes (el menú y el footer)
+    loadHeader();
+    loadFooter();
+
+    // 2. Lógica de INDEX (Carrusel)
+    if (document.querySelector('.carousel-track')) {
+        initCarousel();
+    }
+
+    // 3. Lógica del COTIZADOR (Pasos)
+    if (document.getElementById('step-1')) {
+        irAlPaso(1);
+    }
 });
 
 /* ==========================================
-   SECCIÓN: HEADER
+    SECCIÓN: RUTAS DINÁMICAS
    ========================================== */
-
 function getRelativePath() {
     const path = window.location.pathname;
-    // Si estamos en una subcarpeta (ej: /guias/articulo.html), necesitamos ../
-    // Contamos las barras inclinadas después de la raíz del proyecto
-    const depth = (path.match(/\//g) || []).length;
+    const isGitHub = path.includes('InfoComunidad');
     
-    // Si estás en GitHub Pages (ej: /InfoComunidad/guias/articulo.html), 
-    // la profundidad suele ser 2 o más. 
-    // Ajustamos para que funcione tanto en local como en GitHub.
-    if (path.includes('github.io')) {
-        return depth > 2 ? '../' : '';
+    // Contamos las carpetas reales en la URL
+    const segments = path.split('/').filter(s => s.length > 0);
+    
+    // Si estamos en local (localhost:5500/guias/articulo.html) -> segments es ["guias", "articulo.html"]
+    // Si estamos en GitHub (/InfoComunidad/guias/articulo.html) -> segments es ["InfoComunidad", "guias", "articulo.html"]
+    
+    let depth = isGitHub ? segments.length - 1 : segments.length;
+
+    // Si el último segmento es un archivo .html, restamos uno para saber la profundidad de carpetas
+    if (segments[segments.length - 1].includes('.html')) {
+        depth--;
     }
-    return depth > 1 ? '../' : '';
+
+    return depth > 0 ? '../'.repeat(depth) : '';
 }
 
+/* ==========================================
+    SECCIÓN: HEADER & COMPONENTES
+   ========================================== */
 function loadHeader() {
     const headerElement = document.querySelector('header');
     if (!headerElement) return;
@@ -33,50 +52,20 @@ function loadHeader() {
     fetch(`${prefix}assets/components/header.html`)
         .then(response => response.text())
         .then(data => {
-            // Ajustamos las rutas de las imágenes dentro del HTML cargado
-            headerElement.innerHTML = data.replace(/src="assets\//g, `src="${prefix}assets/`);
+            // Arreglamos imágenes y enlaces HTML
+            let processedData = data.replace(/src="assets\//g, `src="${prefix}assets/`);
+            processedData = processedData.replace(/href="([^"h][^"]+\.html)/g, `href="${prefix}$1`);
+
+            headerElement.innerHTML = processedData;
             
+            // IMPORTANTE: Inicializamos el menú móvil SOLO después de inyectar el HTML
             initMobileMenu();
             initScrollSpy();
         })
         .catch(err => console.error("Error cargando el header:", err));
 }
 
-function initScrollSpy() {
-    // Solo ejecutamos esto si estamos en la página index (donde están las secciones)
-    if (!document.querySelector('#servicios')) return;
-
-    const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('#navMenu a');
-
-    const options = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.6 // Se activa cuando el 60% de la sección es visible
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                navLinks.forEach(link => {
-                    link.classList.remove('active');
-                    // Comprobamos si el href del enlace coincide con el id de la sección
-                    if (link.getAttribute('href').includes(entry.target.id)) {
-                        link.classList.add('active');
-                    }
-                });
-            }
-        });
-    }, options);
-
-    sections.forEach(section => observer.observe(section));
-}
-
-/* ==========================================
-    SECCIÓN: FOOTER
-    ========================================== */
-
-    function loadFooter() {
+function loadFooter() {
     const footerElement = document.querySelector('footer');
     if (!footerElement) return;
 
@@ -90,30 +79,6 @@ function initScrollSpy() {
         .catch(err => console.error("Error cargando el footer:", err));
 }
 
-// --- VARIABLES GLOBALES DEL COTIZADOR ---
-let autocomplete, map, marker;
-let direccionSeleccionada = {
-    direccionCompleta: "", calle: "", numero: "", ciudad: "", provincia: "", codigoPostal: ""
-};
-
-document.addEventListener('DOMContentLoaded', () => {
-    // 1. LÓGICA COMÚN (Menú)
-    initMobileMenu();
-
-    // 2. LÓGICA DE INDEX (Carrusel)
-    if (document.querySelector('.carousel-track')) {
-        initCarousel();
-    }
-
-    // 3. LÓGICA DEL COTIZADOR (Pasos)
-    if (document.getElementById('step-1')) {
-        irAlPaso(1);
-    }
-});
-
-/* ==========================================
-   SECCIÓN: COMÚN & MENÚ
-   ========================================== */
 function initMobileMenu() {
     const menuToggle = document.getElementById('menuToggle');
     const navMenu = document.getElementById('navMenu');
@@ -124,7 +89,8 @@ function initMobileMenu() {
         menuToggle.classList.toggle('open');
     });
 
-    document.querySelectorAll('#navMenu a').forEach(link => {
+    // Usamos delegación de eventos o re-asignamos a los nuevos enlaces
+    navMenu.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', () => {
             navMenu.classList.remove('active');
             menuToggle.classList.remove('open');
