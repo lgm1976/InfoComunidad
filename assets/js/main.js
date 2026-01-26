@@ -19,19 +19,56 @@ function loadHeader() {
         .then(data => {
             headerElement.innerHTML = data;
             
-            // 1. Reiniciar el menú móvil (ahora que existe en el DOM)
-            initMobileMenu(); 
+            // 1. Inicializar funciones que dependen del HTML cargado
+            initMobileMenu();
+            initScrollSpy();
             
-            // 2. Marcar el enlace activo
+            // 2. Lógica inteligente de "Enlace Activo"
             const currentPath = window.location.pathname;
             const links = document.querySelectorAll('#navMenu a');
+
             links.forEach(link => {
-                if (currentPath.includes(link.getAttribute('href'))) {
+                const href = link.getAttribute('href');
+                
+                // Si estamos en el cotizador, marcamos solo ese botón
+                if (currentPath.includes('cotizador.html') && href === 'cotizador.html') {
                     link.classList.add('active');
-                }
+                } 
+                // Si estamos en la home, el scrollSpy se encargará de las secciones,
+                // pero podemos marcar "Servicios" o "Home" por defecto si quieres.
             });
         })
         .catch(err => console.error("Error cargando el header:", err));
+}
+
+function initScrollSpy() {
+    // Solo ejecutamos esto si estamos en la página index (donde están las secciones)
+    if (!document.querySelector('#servicios')) return;
+
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('#navMenu a');
+
+    const options = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.6 // Se activa cuando el 60% de la sección es visible
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    // Comprobamos si el href del enlace coincide con el id de la sección
+                    if (link.getAttribute('href').includes(entry.target.id)) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+        });
+    }, options);
+
+    sections.forEach(section => observer.observe(section));
 }
 
 // --- VARIABLES GLOBALES DEL COTIZADOR ---

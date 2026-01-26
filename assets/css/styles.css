@@ -13,6 +13,11 @@
   --radius: 8px;
 }
 
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px;
+}
+
 /* =========================================================
    RESET / BASE
    ========================================================= */
@@ -63,6 +68,9 @@ h2 {
 
 .section {
   padding: 96px 0;
+  min-height: 60vh;
+  padding-top: 100px;
+  margin-top: -60px;
 }
 
 .center {
@@ -744,6 +752,17 @@ footer {
 .section.dark {
   background-color: var(--primary); 
   color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centrado vertical */
+  align-items: center;     /* Centrado horizontal */
+  min-height: 60vh;        /* Altura mínima para que se vea amplio */
+  padding: 0;              /* Reset de padding para control total */
+  margin-top: 0;           /* Eliminamos el margen negativo en esta sección */
+}
+
+.section.dark .container {
+    width: 100%;
 }
 
 .section.dark h2,
