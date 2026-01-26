@@ -42,6 +42,11 @@ a {
   color: inherit;
 }
 
+p {
+  margin-bottom: 16px;
+  font-size: 1rem;
+} 
+
 h1 {
   color: var(--primary);
   font-size: 2.2rem;
@@ -54,6 +59,16 @@ h2 {
   font-size: 1.4rem;
   font-weight: 600;
   margin-bottom: 25px;
+}
+
+h3 {
+  padding: 20px 0px;
+}
+
+hr {
+  margin: 30px 0;
+  border: 0;
+  border-top: 2px solid #8c1d2a;
 }
 
 /* =========================================================
@@ -71,6 +86,7 @@ h2 {
   min-height: 60vh;
   padding-top: 100px;
   margin-top: -60px;
+  max-width: 850px;
 }
 
 .center {
