@@ -9,33 +9,35 @@
    SECCIÓN: HEADER
    ========================================== */
 
+function getRelativePath() {
+    const path = window.location.pathname;
+    // Si estamos en una subcarpeta (ej: /guias/articulo.html), necesitamos ../
+    // Contamos las barras inclinadas después de la raíz del proyecto
+    const depth = (path.match(/\//g) || []).length;
+    
+    // Si estás en GitHub Pages (ej: /InfoComunidad/guias/articulo.html), 
+    // la profundidad suele ser 2 o más. 
+    // Ajustamos para que funcione tanto en local como en GitHub.
+    if (path.includes('github.io')) {
+        return depth > 2 ? '../' : '';
+    }
+    return depth > 1 ? '../' : '';
+}
+
 function loadHeader() {
     const headerElement = document.querySelector('header');
     if (!headerElement) return;
 
-    fetch('assets/components/header.html')
+    const prefix = getRelativePath();
+    
+    fetch(`${prefix}assets/components/header.html`)
         .then(response => response.text())
         .then(data => {
-            headerElement.innerHTML = data;
+            // Ajustamos las rutas de las imágenes dentro del HTML cargado
+            headerElement.innerHTML = data.replace(/src="assets\//g, `src="${prefix}assets/`);
             
-            // 1. Inicializar funciones que dependen del HTML cargado
             initMobileMenu();
             initScrollSpy();
-            
-            // 2. Lógica inteligente de "Enlace Activo"
-            const currentPath = window.location.pathname;
-            const links = document.querySelectorAll('#navMenu a');
-
-            links.forEach(link => {
-                const href = link.getAttribute('href');
-                
-                // Si estamos en el cotizador, marcamos solo ese botón
-                if (currentPath.includes('cotizador.html') && href === 'cotizador.html') {
-                    link.classList.add('active');
-                } 
-                // Si estamos en la home, el scrollSpy se encargará de las secciones,
-                // pero podemos marcar "Servicios" o "Home" por defecto si quieres.
-            });
         })
         .catch(err => console.error("Error cargando el header:", err));
 }
@@ -78,7 +80,9 @@ function initScrollSpy() {
     const footerElement = document.querySelector('footer');
     if (!footerElement) return;
 
-    fetch('assets/components/footer.html')
+    const prefix = getRelativePath();
+
+    fetch(`${prefix}assets/components/footer.html`)
         .then(response => response.text())
         .then(data => {
             footerElement.innerHTML = data;

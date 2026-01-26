@@ -22,7 +22,3 @@
 Debido a las integraciones de APIs y el manejo de formularios, sigue estos pasos para el despliegue local:
 
 [PENDIENTE DE DEFINICIÓN]
-
-### 1. Clonar el repositorio
-```bash
-git clone [https://github.com/lgm1976/InfoComunidad.git](https://github.com/lgm1976/InfoComunidad.git)

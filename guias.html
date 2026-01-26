@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guías Rápidas para Comunidades - InfoComunidad</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
+  <style>
+    .guias-hero { background: var(--primary); color: white; padding: 80px 0 40px; text-align: center; }
+    .guias-grid { 
+        display: grid; 
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+        gap: 25px; 
+        margin: 50px 0; 
+    }
+    .guia-card { 
+        background: white; 
+        border: 1px solid #eee; 
+        border-radius: 8px; 
+        overflow: hidden; 
+        transition: transform 0.3s, box-shadow 0.3s;
+        display: flex;
+        flex-direction: column;
+    }
+    .guia-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+    .guia-card-content { padding: 20px; flex-grow: 1; }
+    .guia-card h3 { margin: 0 0 10px; color: var(--primary); }
+    .guia-card p { font-size: 0.95em; color: #666; line-height: 1.5; }
+    .guia-card-footer { padding: 15px 20px; background: #f9f9f9; border-top: 1px solid #eee; }
+    .btn-leer { color: var(--primary); text-decoration: none; font-weight: bold; font-size: 0.9em; }
+  </style>
+</head>
+<body>
+
+  <header></header> <section class="guias-hero">
+    <div class="container">
+        <h1>Guías Rápidas</h1>
+        <p>Información clara y directa para mejorar la gestión de tu comunidad.</p>
+    </div>
+  </section>
+
+  <main class="container">
+    <div class="guias-grid">
+      
+      <article class="guia-card">
+        <div class="guia-card-content">
+          <h3>Las 5 derramas más comunes</h3>
+          <p>Aprende cuáles son los gastos extraordinarios más frecuentes y, lo más importante, qué pasos dar para evitarlos mediante el mantenimiento preventivo.</p>
+        </div>
+        <div class="guia-card-footer">
+          <a href="guias/derramas-comunes.html" class="btn-leer">Leer guía completa →</a>
+        </div>
+      </article>
+
+      <article class="guia-card" style="opacity: 0.7;">
+        <div class="guia-card-content">
+          <h3>Cómo leer un presupuesto</h3>
+          <p>Próximamente: Te enseñamos a desglosar las partidas de una oferta de administración para que no te den gato por liebre.</p>
+        </div>
+        <div class="guia-card-footer">
+          <span style="font-size: 0.8em; color: #999;">Muy pronto</span>
+        </div>
+      </article>
+
+      <article class="guia-card" style="opacity: 0.7;">
+        <div class="guia-card-content">
+          <h3>Eficiencia Energética</h3>
+          <p>Próximamente: Guía sobre ayudas públicas y fondos Next Generation para la rehabilitación de edificios.</p>
+        </div>
+        <div class="guia-card-footer">
+          <span style="font-size: 0.8em; color: #999;">Muy pronto</span>
+        </div>
+      </article>
+
+    </div>
+  </main>
+
+  <footer></footer> <script src="assets/js/main.js"></script>
+</body>
+</html>
