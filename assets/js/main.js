@@ -1,14 +1,13 @@
 /*** InfoComunidad - JavaScript Centralizado v2.0  ***/
 
+ document.addEventListener('DOMContentLoaded', () => {
+    loadHeader(); // <-- Llamamos a la función al cargar
+    loadFooter(); // <-- Llamamos a la función al cargar
+});
+
 /* ==========================================
    SECCIÓN: HEADER
    ========================================== */
-
-   document.addEventListener('DOMContentLoaded', () => {
-    loadHeader(); // <-- Llamamos a la función al cargar
-    
-    // ... resto de tus inicializaciones (carrusel, etc.)
-});
 
 function loadHeader() {
     const headerElement = document.querySelector('header');
@@ -69,6 +68,22 @@ function initScrollSpy() {
     }, options);
 
     sections.forEach(section => observer.observe(section));
+}
+
+/* ==========================================
+    SECCIÓN: FOOTER
+    ========================================== */
+
+    function loadFooter() {
+    const footerElement = document.querySelector('footer');
+    if (!footerElement) return;
+
+    fetch('assets/components/footer.html')
+        .then(response => response.text())
+        .then(data => {
+            footerElement.innerHTML = data;
+        })
+        .catch(err => console.error("Error cargando el footer:", err));
 }
 
 // --- VARIABLES GLOBALES DEL COTIZADOR ---
