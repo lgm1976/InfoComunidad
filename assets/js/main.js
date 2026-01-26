@@ -1,5 +1,39 @@
 /*** InfoComunidad - JavaScript Centralizado v2.0  ***/
 
+/* ==========================================
+   SECCIÓN: HEADER
+   ========================================== */
+
+   document.addEventListener('DOMContentLoaded', () => {
+    loadHeader(); // <-- Llamamos a la función al cargar
+    
+    // ... resto de tus inicializaciones (carrusel, etc.)
+});
+
+function loadHeader() {
+    const headerElement = document.querySelector('header');
+    if (!headerElement) return;
+
+    fetch('assets/components/header.html')
+        .then(response => response.text())
+        .then(data => {
+            headerElement.innerHTML = data;
+            
+            // 1. Reiniciar el menú móvil (ahora que existe en el DOM)
+            initMobileMenu(); 
+            
+            // 2. Marcar el enlace activo
+            const currentPath = window.location.pathname;
+            const links = document.querySelectorAll('#navMenu a');
+            links.forEach(link => {
+                if (currentPath.includes(link.getAttribute('href'))) {
+                    link.classList.add('active');
+                }
+            });
+        })
+        .catch(err => console.error("Error cargando el header:", err));
+}
+
 // --- VARIABLES GLOBALES DEL COTIZADOR ---
 let autocomplete, map, marker;
 let direccionSeleccionada = {
