@@ -129,69 +129,6 @@
   </div>
 </section>
 
-<script>
-  (function () {
-    const track = document.querySelector('.carousel-track');
-    const items = Array.from(document.querySelectorAll('.carousel-item'));
-    const prev = document.querySelector('.carousel-btn.prev');
-    const next = document.querySelector('.carousel-btn.next');
-
-    const visible = window.innerWidth < 768 ? 1 : 3;
-    const gap = 0;                    // gap en px (CSS)
-    let index = 0;
-
-    // Clonamos para efecto rueda (zoótropo)
-    const clonesBefore = items.slice(-visible).map(el => el.cloneNode(true));
-    const clonesAfter  = items.slice(0, visible).map(el => el.cloneNode(true));
-
-    clonesBefore.forEach(clone => track.prepend(clone));
-    clonesAfter.forEach(clone => track.append(clone));
-
-    const allItems = Array.from(track.children);
-
-    // Posición inicial real (después de clones iniciales)
-    index = visible;
-
-    function itemWidth() {
-      return allItems[0].offsetWidth;;
-    }
-
-    function move(animate = true) {
-      track.style.transition = animate ? 'transform .4s ease' : 'none';
-      track.style.transform = `translateX(-${index * itemWidth()}px)`;
-    }
-
-    // Posición inicial sin animación
-    move(false);
-
-    next.addEventListener('click', () => {
-      index++;
-      move(true);
-
-      if (index === allItems.length - visible) {
-        setTimeout(() => {
-          index = visible;
-          move(false);
-        }, 400);
-      }
-    });
-
-    prev.addEventListener('click', () => {
-      index--;
-      move(true);
-
-      if (index === 0) {
-        setTimeout(() => {
-          index = allItems.length - (visible * 2);
-          move(false);
-        }, 400);
-      }
-    });
-
-    window.addEventListener('resize', () => move(false));
-  })();
-</script>
-
 <section id="nosotros" class="section dark">
   <div class="container center">
     <h2 class="about-title">
@@ -302,67 +239,8 @@
 <footer>
   © 2026 · InfoComunidad · Todos los derechos reservados.
 </footer>
-<script>
-  function enviarContacto() {
-  const btn = document.getElementById('btnEnviarContacto');
-  const nombre = document.getElementById('cNombre').value;
-  const email = document.getElementById('cMail').value;
-  const mensaje = document.getElementById('cMensaje').value;
 
-  // Validación básica
-  if (!nombre || !email || !mensaje) {
-    alert("Por favor, rellena todos los campos.");
-    return;
-  }
+<script src="assets/js/main.js"></script>
 
-  btn.innerText = "Enviando...";
-  btn.disabled = true;
-
-  // URL de tu Google Form (la que termina en /formResponse)
-  const formURL = "https://docs.google.com/forms/d/e/1FAIpQLSemH7TWACmrHYN0iZk0QCKMYsNO3UJGHjPyr6dlx2BJAnNNbQ/formResponse";
-  
-  const fd = new FormData();
-  // Usamos los códigos que me has pasado
-  fd.append("entry.467394497", nombre);
-  fd.append("entry.2139652702", email);
-  fd.append("entry.1907644416", mensaje);
-
-  fetch(formURL, {
-    method: "POST",
-    mode: "no-cors",
-    body: fd
-  })
-  .then(() => {
-    // Sustituimos el formulario por un mensaje de éxito
-    document.getElementById('contenedorContacto').innerHTML = `
-      <div class="card" style="max-width:500px;margin:48px auto 0;padding:40px;text-align:center;">
-        <div style="font-size:40px;color:#28a745;margin-bottom:20px">✓</div>
-        <h3>¡Mensaje enviado!</h3>
-        <p>Gracias por contactar con InfoComunidad. Te responderemos muy pronto.</p>
-      </div>`;
-  })
-  .catch(err => {
-    alert("Hubo un error al enviar. Por favor, inténtalo de nuevo.");
-    btn.innerText = "Enviar Mensaje";
-    btn.disabled = false;
-  });
-}
-
-const menuToggle = document.getElementById('menuToggle');
-const navMenu = document.getElementById('navMenu');
-
-menuToggle.addEventListener('click', () => {
-  navMenu.classList.toggle('active');
-  // Animación opcional del botón:
-  menuToggle.classList.toggle('open');
-});
-
-// Cerrar el menú automáticamente al hacer clic en un enlace (ideal para móviles)
-document.querySelectorAll('#navMenu a').forEach(link => {
-  link.addEventListener('click', () => {
-    navMenu.classList.remove('active');
-  });
-});
-</script>
 </body>
 </html>
