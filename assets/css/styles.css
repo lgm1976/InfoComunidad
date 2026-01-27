@@ -977,10 +977,16 @@ footer {
 
 /* --- Directorio de Servicios --- */
 .search-hero { 
-    background: #f4f7f6; 
+    background: var(--light); 
     padding: 60px 0; 
     border-bottom: 1px solid #eee; 
     margin-top: 60px; 
+}
+.search-hero h1 {
+    color: var(--primary);
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    text-align: center;
 }
 .search-box { 
     display: flex; 
@@ -1016,13 +1022,14 @@ footer {
 
 .badge-24h {
     display: inline-block;
-    background-color: #dcfce7; /* Verde clarito */
-    color: #166534;            /* Verde oscuro */
+    background-color: #b8323a; /* Verde clarito */
+    color: #fff;            /* Verde oscuro */
     font-size: 11px;
     font-weight: bold;
+    text-align: center;
     padding: 3px 10px;
     border-radius: 20px;
-    border: 1px solid #bbf7d0;
+    border: 1px solid #8c1d2a;
     text-transform: uppercase;
     margin-bottom: 8px;
 }
