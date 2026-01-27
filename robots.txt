@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://lgm1976.github.io/InfoComunidad/sitemap.xml
