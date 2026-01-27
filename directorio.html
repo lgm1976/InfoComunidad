@@ -29,13 +29,27 @@
       <h1 style="text-align: center; margin-bottom: 20px;">Busca Profesionales para tu Comunidad</h1>
       <div class="search-box">
         <select id="serviceType">
-          <option value="administrador de propiedades">Administradores</option>
-          <option value="fontanero">Fontaneros</option>
-          <option value="empresa de limpieza">Limpieza</option>
-          <option value="electricista">Electricistas</option>
-          <option value="reformas">Reformas / Albañilería</option>
-          <option value="pintores">Pintores</option>
-        </select>
+  <optgroup label="MANTENIMIENTO Y GESTIÓN">
+    <option value="administrador de propiedades">Administradores</option>
+    <option value="mantenimiento de ascensores">Ascensores</option>
+    <option value="empresa de limpieza">Limpieza</option>
+    <option value="jardinero">Jardinería</option>
+    <option value="mantenimiento de piscinas">Piscinas</option>
+    <option value="antenista">Antenas / TV</option>
+    <option value="desinsectación">Control de Plagas (Cucarachas/Ratas)</option>
+    <option value="mantenimiento puertas garaje">Puertas de Garaje</option>
+  </optgroup>
+
+  <optgroup label="REFORMAS Y TÉCNICOS">
+    <option value="fontanero">Fontaneros</option>
+    <option value="electricista">Electricistas</option>
+    <option value="reformas">Reformas / Albañilería</option>
+    <option value="pintores">Pintores</option>
+    <option value="cerrajero">Cerrajería</option>
+    <option value="poceria">Pocería</option>
+    <option value="arquitecto técnico">Arquitecto (ITE / IEE)</option>
+  </optgroup>
+</select>
         <input type="text" id="locationInput" placeholder="Ciudad o Código Postal (ej: Madrid)">
         <button class="btn-presupuesto" onclick="searchPlaces()">Buscar</button>
       </div>

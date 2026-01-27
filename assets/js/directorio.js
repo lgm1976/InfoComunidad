@@ -28,21 +28,32 @@ function searchPlaces() {
         return;
     }
 
-    // Feedback visual de carga
-    resultsGrid.innerHTML = '<p style="grid-column: 1/-1; text-align: center;">Buscando los mejores profesionales en ' + location + '...</p>';
+    // 1. Detectamos si el usuario ha seleccionado una opción de urgencia
+    // Esto busca si el valor contiene "24 horas" o "urgente"
+    const esUrgencia = type.toLowerCase().includes('24 horas') || type.toLowerCase().includes('urgente');
+
+    // Feedback visual
+    resultsGrid.innerHTML = esUrgencia 
+        ? '<p style="grid-column: 1/-1; text-align: center; color: #b91c1c; font-weight: bold;">🚨 Buscando servicios de emergencia abiertos ahora en ' + location + '...</p>'
+        : '<p style="grid-column: 1/-1; text-align: center;">Buscando profesionales en ' + location + '...</p>';
 
     const request = {
         query: `${type} en ${location}`,
-        // Campos básicos para la primera búsqueda (no incluye teléfono por restricciones de Google)
-        fields: ['name', 'geometry', 'formatted_address', 'rating', 'user_ratings_total', 'place_id']
+        fields: ['name', 'geometry', 'formatted_address', 'rating', 'user_ratings_total', 'place_id', 'opening_hours'],
+        // 2. FILTRO CLAVE: Si es urgencia, solo muestra negocios abiertos YA.
+        // Si no es urgencia, muestra todos (aunque estén cerrados ahora).
+        openNow: esUrgencia 
     };
 
     service.textSearch(request, (results, status) => {
         if (status === google.maps.places.PlacesServiceStatus.OK && results) {
             renderizarResultados(results);
         } else {
-            console.error("Error en la búsqueda:", status);
-            resultsGrid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: red;">No se encontraron resultados o hay un problema con la clave API (${status}).</p>`;
+            const mensajeError = esUrgencia 
+                ? "No se han encontrado servicios de urgencia abiertos ahora en esta zona."
+                : "No se encontraron resultados para esta búsqueda.";
+            
+            resultsGrid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: #666;">${mensajeError}</p>`;
         }
     });
 }
@@ -56,50 +67,46 @@ function renderizarResultados(places) {
 
     const MI_NEGOCIO_ID = "ChIJnYofDgwmQg0RYTGdt8CGi6I"; // ID de Brasero Gestión
 
-    // 1. Identificar si nuestro negocio está en la lista de resultados
     let miNegocio = places.find(p => p.place_id === MI_NEGOCIO_ID);
-    
-    // 2. Crear una lista nueva sin nuestro negocio (para que no salga duplicado)
     let otrosNegocios = places.filter(p => p.place_id !== MI_NEGOCIO_ID);
 
-    // 3. Crear la lista final: Mi negocio primero, luego los demás
-    let listaFinal = [];
-    if (miNegocio) {
-        listaFinal = [miNegocio, ...otrosNegocios];
-    } else {
-        // Si Google NO lo encontró en esta búsqueda, lo dejamos como estaba
-        // (Opcional: Podríamos forzar su carga aquí, pero requiere otra llamada a API)
-        listaFinal = otrosNegocios;
-    }
+    let listaFinal = miNegocio ? [miNegocio, ...otrosNegocios] : otrosNegocios;
 
-    // 4. Renderizar la lista final (máximo 9)
     listaFinal.slice(0, 9).forEach((place, index) => {
         const card = document.createElement('article');
         card.className = 'place-card';
         
-        // OPCIONAL: Añadir un estilo especial si es el nuestro
-    /*    if (place.place_id === MI_NEGOCIO_ID) {
-            card.style.border = "2px solid var(--primary)";
-            card.innerHTML = `<span style="background: var(--primary); color:white; padding:2px 10px; font-size:10px; border-radius:3px; align-self:start; margin-bottom:10px;">RECOMENDADO</span>`;
-        }
-     */
+        // --- LÓGICA DE DETECCIÓN 24 HORAS ---
+        // Comprobamos si Google indica que abre 24h o si el nombre lo sugiere
+        const es24h = (place.opening_hours && place.opening_hours.periods && 
+                       place.opening_hours.periods.length === 1 && 
+                       place.opening_hours.periods[0].open.day === 0 && 
+                       place.opening_hours.periods[0].open.time === "0000") || 
+                       place.name.toLowerCase().includes('24h') || 
+                       place.name.toLowerCase().includes('24 horas');
+
+        const badge24h = es24h ? `<span class="badge-24h">⏱ Servicio 24h</span>` : '';
+        // ------------------------------------
+
         const mapDivId = `mini-map-${place.place_id}`;
         
-        // El resto del innerHTML se mantiene igual que antes...
-        card.innerHTML += `
-            <div id="${mapDivId}" class="mini-map"></div>
-            <h3>${place.name}</h3>
-            <div class="rating">
-                ${'★'.repeat(Math.floor(place.rating || 0))} 
-                <span>(${place.user_ratings_total || 0} reseñas)</span>
-            </div>
-            <p><strong>Dirección:</strong> ${place.formatted_address}</p>
-            <p id="phone-${place.place_id}" style="color: var(--primary); font-weight: bold; margin-bottom: 15px;">
-                📞 Cargando teléfono...
-            </p>
-            <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(place.name)}&query_place_id=${place.place_id}" 
-               target="_blank" class="btn-leer">Ver contacto completo</a>
-        `;
+        card.innerHTML = `
+    <div id="${mapDivId}" class="mini-map"></div>
+    <div class="place-card-content"> 
+        ${badge24h}
+        <h3>${place.name}</h3>
+        <div class="rating">
+            ${'★'.repeat(Math.floor(place.rating || 0))} 
+            <span>(${place.user_ratings_total || 0} reseñas)</span>
+        </div>
+        <p><strong>Dirección:</strong> ${place.formatted_address}</p>
+        <p id="phone-${place.place_id}">
+            📞 Cargando teléfono...
+        </p>
+        <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(place.name)}&query_place_id=${place.place_id}" 
+           target="_blank" class="btn-leer">Ver contacto completo</a>
+    </div>
+`;
 
         resultsGrid.appendChild(card);
         initMiniMap(mapDivId, place.geometry.location);
