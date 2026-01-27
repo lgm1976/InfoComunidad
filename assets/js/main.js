@@ -79,6 +79,11 @@ function loadFooter() {
         .catch(err => console.error("Error cargando el footer:", err));
 }
 
+// [AÑADIR ESTA FUNCIÓN]
+function initScrollSpy() {
+    // Función vacía para evitar errores. Implementar si es necesario en el futuro.
+}
+
 function initMobileMenu() {
     const menuToggle = document.getElementById('menuToggle');
     const navMenu = document.getElementById('navMenu');
