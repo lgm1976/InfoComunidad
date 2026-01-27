@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test de Salud de tu Comunidad - InfoComunidad</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
+  <style>
+    .test-container { max-width: 700px; margin: 100px auto 60px; padding: 20px; }
+    .question-card { background: white; border: 1px solid #eee; padding: 30px; border-radius: 12px; margin-bottom: 20px; display: none; }
+    .question-card.active { display: block; animation: fadeIn 0.5s; }
+    .options-grid { display: grid; gap: 10px; margin-top: 20px; }
+    .option-btn { padding: 15px; border: 1px solid var(--primary); background: white; color: var(--primary); border-radius: 8px; cursor: pointer; transition: 0.3s; font-weight: bold; }
+    .option-btn:hover { background: var(--primary); color: white; }
+    .progress-bar { height: 8px; background: #eee; border-radius: 4px; margin-bottom: 30px; overflow: hidden; }
+    .progress-fill { height: 100%; background: var(--primary); width: 0%; transition: 0.3s; }
+    #result-area { text-align: center; display: none; }
+    .score-circle { width: 120px; height: 120px; border-radius: 50%; border: 8px solid var(--primary); line-height: 104px; font-size: 2em; font-weight: bold; margin: 20px auto; color: var(--primary); }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+  </style>
+</head>
+<body>
+
+  <header></header>
+
+  <main class="test-container">
+    <div id="test-intro">
+      <h1>¿Qué tan sana está tu comunidad?</h1>
+      <p>Responde 5 preguntas rápidas para descubrir si la gestión de tu edificio es profesional o si estás perdiendo dinero.</p>
+      <center><button class="btn btn-primary" onclick="startTest()" style="margin-top: 20px;">Empezar Test</button></center>
+    </div>
+
+    <div id="test-area" style="display:none;">
+      <div class="progress-bar"><div class="progress-fill" id="progress"></div></div>
+      
+      <div id="questions">
+        <div class="question-card active" data-step="1">
+          <h3>1. ¿Tenéis acceso online a las facturas y cuentas en tiempo real?</h3>
+          <div class="options-grid">
+            <button class="option-btn" onclick="nextStep(20)">Sí, tenemos App o web</button>
+            <button class="option-btn" onclick="nextStep(5)">No, hay que pedirlas por email</button>
+            <button class="option-btn" onclick="nextStep(0)">Ni siquiera sé si existen</button>
+          </div>
+        </div>
+
+        <div class="question-card" data-step="2">
+          <h3>2. ¿Cuándo fue la última Junta General Ordinaria?</h3>
+          <div class="options-grid">
+            <button class="option-btn" onclick="nextStep(20)">Hace menos de un año</button>
+            <button class="option-btn" onclick="nextStep(10)">Hace más de un año</button>
+            <button class="option-btn" onclick="nextStep(0)">No se celebran juntas</button>
+          </div>
+        </div>
+
+        <div class="question-card" data-step="3">
+          <h3>3. ¿Cuál es el nivel de morosidad en tu bloque?</h3>
+          <div class="options-grid">
+            <button class="option-btn" onclick="nextStep(20)">Bajo / Controlado</button>
+            <button class="option-btn" onclick="nextStep(5)">Alto y sin acciones legales</button>
+            <button class="option-btn" onclick="nextStep(0)">Es un caos total</button>
+          </div>
+        </div>
+
+        <div class="question-card" data-step="4">
+          <h3>4. ¿Se realizan visitas técnicas de mantenimiento preventivo?</h3>
+          <div class="options-grid">
+            <button class="option-btn" onclick="nextStep(20)">Sí, el administrador viene a menudo</button>
+            <button class="option-btn" onclick="nextStep(5)">Solo viene cuando hay una avería</button>
+            <button class="option-btn" onclick="nextStep(0)">No le hemos visto nunca el pelo</button>
+          </div>
+        </div>
+
+        <div class="question-card" data-step="5">
+          <h3>5. ¿Se han solicitado ayudas/subvenciones en los últimos 2 años?</h3>
+          <div class="options-grid">
+            <button class="option-btn" onclick="finishTest(20)">Sí, estamos al día</button>
+            <button class="option-btn" onclick="finishTest(5)">Se intentó pero sin éxito</button>
+            <button class="option-btn" onclick="finishTest(0)">No, perdemos todas las ayudas</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="result-area">
+      <h2>Resultado de tu diagnóstico</h2>
+      <div class="score-circle" id="final-score">0</div>
+      <p id="result-text"></p>
+      <div style="background: #f9f9f9; padding: 20px; border-radius: 8px; margin-top: 20px;">
+        <h3>¿Quieres mejorar esta puntuación?</h3>
+        <p>Un administrador profesional puede subir la salud de tu comunidad en pocos meses.</p>
+        <a href="cotizador.html" class="btn btn-primary" style="display: inline-block; text-decoration: none;">Calcula tu presupuesto</a>
+      </div>
+    </div>
+  </main>
+
+  <footer></footer>
+
+  <script src="assets/js/main.js"></script>
+  <script>
+    let currentScore = 0;
+    let currentStep = 1;
+    const totalSteps = 5;
+
+    function startTest() {
+      document.getElementById('test-intro').style.display = 'none';
+      document.getElementById('test-area').style.display = 'block';
+    }
+
+    function nextStep(points) {
+      currentScore += points;
+      document.querySelector(`[data-step="${currentStep}"]`).classList.remove('active');
+      currentStep++;
+      document.querySelector(`[data-step="${currentStep}"]`).classList.add('active');
+      updateProgress();
+    }
+
+    function updateProgress() {
+      const percent = (currentStep / totalSteps) * 100;
+      document.getElementById('progress').style.width = percent + '%';
+    }
+
+    function finishTest(points) {
+      currentScore += points;
+      updateProgress();
+      document.getElementById('test-area').style.display = 'none';
+      document.getElementById('result-area').style.display = 'block';
+      
+      const scoreEl = document.getElementById('final-score');
+      scoreEl.innerText = currentScore;
+
+      const textEl = document.getElementById('result-text');
+      if(currentScore >= 80) {
+        textEl.innerText = "¡Enhorabuena! Tu comunidad está bien gestionada, pero siempre hay margen para optimizar costes.";
+      } else if(currentScore >= 50) {
+        textEl.innerText = "Salud mediocre. Hay riesgos de morosidad y falta de transparencia que podrían estallar pronto.";
+      } else {
+        textEl.innerText = "Urgente: Tu comunidad está en riesgo. La gestión actual es deficiente y os está costando dinero.";
+      }
+    }
+  </script>
+</body>
+</html>

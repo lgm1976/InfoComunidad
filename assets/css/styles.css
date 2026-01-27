@@ -129,6 +129,53 @@ nav a.active {
   font-weight: 700;
 }
 
+/* Estilos para el Dropdown */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: white;
+  min-width: 220px;
+  box-shadow: 0px 8px 16px rgba(0,0,0,0.3);
+  border-radius: 4px;
+  z-index: 1000;
+  border-top: 3px solid var(--primary-color);
+}
+
+.dropdown-content a {
+  color: #333 !important;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  font-size: 0.9em;
+  border-bottom: 1px solid #eee;
+}
+
+.dropdown-content a:hover {
+  background-color: #f9f9f9;
+  color: var(--primary-color) !important;
+}
+
+/* Mostrar al pasar el ratón */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Ajuste para móviles */
+@media (max-width: 768px) {
+  .dropdown-content {
+    position: static;
+    box-shadow: none;
+    border: none;
+    padding-left: 20px;
+    display: block; /* En móvil mejor que se vean todos */
+  }
+  .dropdown-toggle { display: none; } /* Ocultamos el "Herramientas ▼" en móvil si prefieres */
+}
 /* =========================================================
    COMPONENTES REUTILIZABLES
    ========================================================= */
@@ -895,4 +942,147 @@ footer {
     width: 100%;
     margin-left: 0;
   }
+}
+/* =========================================================
+   SECCIÓN DE GUIA DE SERVICIOS PROFESIONALES
+   ========================================================= */
+
+   /* --- Botones --- */
+/* Aseguramos que el botón de búsqueda siga el estilo global */
+.btn-presupuesto {
+    background-color: var(--primary); /* Tu color granate */
+    color: white;
+    padding: 12px 25px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    display: inline-block;
+    border: none; /* Quitamos borde por defecto de button */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-presupuesto:hover {
+    background-color: var(--accent); /* Un tono más oscuro para el hover */
+}
+
+
+/* --- Directorio de Servicios --- */
+.search-hero { 
+    background: #f4f7f6; 
+    padding: 60px 0; 
+    border-bottom: 1px solid #eee; 
+    margin-top: 60px; 
+}
+.search-box { 
+    display: flex; 
+    flex-wrap: wrap; /* Permite que los elementos pasen a la siguiente línea en móvil */
+    gap: 10px; 
+    background: white; 
+    padding: 20px; 
+    border-radius: 8px; 
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    max-width: 900px; 
+    margin: 0 auto;
+}
+.search-box select, .search-box input { 
+    padding: 12px; 
+    border: 1px solid #ddd; 
+    border-radius: 4px; 
+    flex: 1; /* Permite que crezcan y ocupen espacio disponible */
+    min-width: 150px; /* Ancho mínimo para que no se colapsen demasiado */
+}
+.search-box button.btn-presupuesto {
+    flex-shrink: 0; /* Evita que el botón se encoja */
+}
+
+/* Estilos para las tarjetas de resultados */
+
+#resultsGrid {
+    display: grid;
+    /* Esto crea columnas de al menos 300px, ajustándose solas al ancho de pantalla */
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
+}
+
+.place-card { 
+    background: white; 
+    border: 1px solid #eee; 
+    border-radius: 8px; 
+    padding: 20px; 
+    transition: transform 0.3s, box-shadow 0.3s;
+    display: flex; 
+    flex-direction: column;
+    /* Eliminamos cualquier width: 100% que pueda estar forzando el ancho */
+    height: 100%; /* Para que todas las tarjetas de una fila midan lo mismo */
+}
+
+.place-card:hover { 
+    transform: translateY(-5px); 
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1); 
+    border-color: var(--primary); /* Resaltar al pasar el ratón */
+}
+
+.place-card h3 {
+    color: var(--primary);
+    margin-top: 0;
+    margin-bottom: 5px;
+    font-size: 1.2em;
+}
+.rating { 
+    color: #f1c40f; /* Amarillo vibrante para las estrellas */
+    font-weight: bold; 
+    font-size: 1.2em;
+    margin-bottom: 10px; 
+    display: flex;
+    align-items: center;
+}
+.rating span {
+    color: #666; 
+    font-size: 0.9em; 
+    margin-left: 5px;
+}
+.place-card p {
+    font-size: 0.95em;
+    color: #555;
+    margin-bottom: 15px;
+    flex-grow: 1; /* Para que la dirección ocupe el espacio disponible */
+}
+
+/* Estilos para el mini-mapa dentro de la tarjeta */
+.mini-map {
+    width: 100%;
+    height: 150px; /* Altura fija para todos los mapas */
+    border-radius: 4px;
+    border: 1px solid #ddd; /* Borde sutil para el mapa */
+    margin-bottom: 15px;
+    background-color: #e0e0e0; /* Color de fondo mientras carga */
+}
+
+/* Estilos para el botón "Ver contacto" */
+.place-card .btn-leer {
+    background-color: var(--secondary); /* Color diferente para destacar */
+    color: white;
+    padding: 10px 15px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+    align-self: flex-start; /* Alinea el botón al inicio de la tarjeta */
+}
+
+.place-card .btn-leer:hover {
+    background-color: var(--accent); /* Tono más oscuro */
+}
+
+/* Responsive para la barra de búsqueda */
+@media (max-width: 600px) {
+    .search-box {
+        flex-direction: column;
+    }
+    .search-box select, .search-box input, .search-box button {
+        width: 100%;
+    }
 }
