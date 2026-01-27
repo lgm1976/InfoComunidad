@@ -164,6 +164,20 @@
   <footer>
   </footer>
 
+  <script>
+    // Variables globales para el cotizador
+    let autocomplete;
+    let map;
+    let marker;
+    const direccionSeleccionada = {
+      direccionCompleta: '',
+      calle: '',
+      numero: '',
+      ciudad: '',
+      provincia: '',
+      codigoPostal: ''
+    };
+  </script>
   <script src="https://maps.googleapis.com/maps/api/js?key=TU_API_KEY&libraries=places&callback=initAutocomplete" async defer></script>
   <script src="assets/js/main.min.js"></script>
 </body>
