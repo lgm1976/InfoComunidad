@@ -171,33 +171,38 @@ nav a.active {
   display: block;
 }
 
-/* Ajuste para móviles */
+/* Ajuste para móviles corregido */
 @media (max-width: 768px) {
+  /* Reseteamos el margen que empuja los enlaces a la derecha/fuera */
+  nav a {
+    margin-left: 0 !important; 
+    display: block;
+    padding: 15px 20px;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: left; /* Alineación limpia a la izquierda */
+    border-bottom: 1px solid #f0f0f0;
+  }
+
   .dropdown {
-    position: relative;
-    width: 100%; /* Ocupa todo el ancho disponible */
+    width: 100%;
   }
 
   .dropdown-content {
-    position: relative; /* Cambiamos static por relative para mejor control */
-    left: 0 !important;
-    transform: none !important;
-    width: 100%;
-    box-shadow: none;
-    border-left: 3px solid var(--secondary); /* Una guía visual para saber que es submenú */
-    padding: 10px 0 10px 20px;
-    display: block; 
-    visibility: visible;
-    opacity: 1;
-    background: transparent; /* Que tome el fondo del header */
+    position: relative !important;
+    display: block !important; /* Siempre visible en el menú lateral móvil */
+    visibility: visible !important;
+    opacity: 1 !important;
+    box-shadow: none !important;
+    border-top: none !important;
+    border-left: 4px solid var(--secondary) !important; /* Indicador de submenú */
+    padding-left: 20px !important; /* Indentación para las sub-herramientas */
+    background: #fafafa !important;
   }
 
-  /* Si quieres mantener el botón de "Herramientas" pero sin la flecha */
-  .dropdown-toggle {
-    font-weight: bold;
-    padding-bottom: 5px;
-    display: block;
-    color: var(--primary);
+  .dropdown-content a {
+    padding: 12px 15px !important;
+    font-size: 0.95rem !important;
   }
 }
 /* =========================================================
