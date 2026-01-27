@@ -174,7 +174,7 @@ nav a.active {
 /* Ajuste para móviles */
 @media (max-width: 768px) {
   .dropdown-content {
-    left: 50%;
+    left: 0;
     transform: translateX(-50%);
     position: static;
     box-shadow: none;
