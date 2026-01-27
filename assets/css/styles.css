@@ -173,16 +173,32 @@ nav a.active {
 
 /* Ajuste para móviles */
 @media (max-width: 768px) {
-  .dropdown-content {
-    left: 0;
-    /* transform: translateX(-50%); */
-    position: static;
-    box-shadow: none;
-    border: none;
-    padding-left: 20px;
-    display: block; /* En móvil mejor que se vean todos */
+  .dropdown {
+    position: relative;
+    width: 100%; /* Ocupa todo el ancho disponible */
   }
-  .dropdown-toggle { display: none; } /* Ocultamos el "Herramientas ▼" en móvil si prefieres */
+
+  .dropdown-content {
+    position: relative; /* Cambiamos static por relative para mejor control */
+    left: 0 !important;
+    transform: none !important;
+    width: 100%;
+    box-shadow: none;
+    border-left: 3px solid var(--secondary); /* Una guía visual para saber que es submenú */
+    padding: 10px 0 10px 20px;
+    display: block; 
+    visibility: visible;
+    opacity: 1;
+    background: transparent; /* Que tome el fondo del header */
+  }
+
+  /* Si quieres mantener el botón de "Herramientas" pero sin la flecha */
+  .dropdown-toggle {
+    font-weight: bold;
+    padding-bottom: 5px;
+    display: block;
+    color: var(--primary);
+  }
 }
 /* =========================================================
    COMPONENTES REUTILIZABLES
