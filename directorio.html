@@ -1,32 +1,16 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Directorio de Profesionales para Comunidades | InfoComunidad</title>
-  <meta name="description" content="Encuentra administradores, cerrajeros y servicios de mantenimiento verificados para tu finca en Madrid.">
-  <link rel="canonical" href="https://lgm1976.github.io/InfoComunidad/directorio.html" />
-  <link rel="stylesheet" href="assets/css/styles.css">
-  <link rel="icon" type="image/png" href="assets/img/favicon.png">
-  <style>
-    .search-hero { background: #f4f7f6; padding: 60px 0; border-bottom: 1px solid #eee; margin-top: 60px; }
-    .search-box { 
-        display: flex; gap: 10px; background: white; padding: 20px; 
-        border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-        max-width: 900px; margin: 0 auto;
-    }
-    .search-box select, .search-box input { padding: 12px; border: 1px solid #ddd; border-radius: 4px; flex: 1; }
-    .place-card { background: white; border: 1px solid #eee; border-radius: 8px; padding: 20px; transition: 0.3s; }
-    .place-card:hover { border-color: var(--primary); box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
-    .rating { color: #f1c40f; font-weight: bold; margin: 5px 0; }
-    #map { display: none; } /* Mapa oculto, solo usamos los datos */
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Directorio de Profesionales - InfoComunidad</title>
+    <link rel="stylesheet" href="assets/css/styles.min.css">
+    <link rel="icon" type="image/png" href="assets/img/favicon.png">
 </head>
 <body>
+    <header></header>
 
-  <header></header>
-
-  <section class="search-hero">
+    <section class="search-hero">
     <div class="container">
       <h1>Busca Profesionales para tu Comunidad</h1>
       <div class="search-box">
@@ -64,10 +48,8 @@
     </div>
   </main>
 
-  <div id="map"></div> <footer></footer>
-
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAB6_6mz_TzxBl-bFTBOxKgfy0M5FPqIOI&libraries=places"></script>
-  <script src="assets/js/main.js"></script>
-  <script src="assets/js/directorio.js"></script>
+  <div id="map"></div>    <footer></footer>
+    <script src="assets/js/main.min.js"></script>
+    <script src="assets/js/directorio.js"></script>
 </body>
 </html>

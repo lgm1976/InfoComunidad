@@ -1,62 +1,16 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Calculadora de Presupuestos y Derramas | InfoComunidad</title>
-  <meta name="description" content="Calcula online el coste de obras, mantenimiento y derramas extraordinarias de tu comunidad de vecinos.">
-  <link rel="canonical" href="https://lgm1976.github.io/InfoComunidad/cotizador.html" />
-  <link rel="icon" type="image/png" href="assets/img/favicon.png">
-
-  <!-- ESTILO CSS -->
-  <link rel="stylesheet" href="assets/css/styles.css">
-
-  <!-- GOOGLE FONT · LATO -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  
-  <!-- FLAT ICONS -->
-  <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cotizador de Administración - InfoComunidad</title>
+    <link rel="stylesheet" href="assets/css/styles.min.css">
+    <link rel="icon" type="image/png" href="assets/img/favicon.png">
 </head>
 <body>
-
-  <!-- LEGAL MODAL -->
-  <div class="modal-overlay" id="legalModal">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h2 style="font-size: 1.2rem;">Política de Privacidad y Protección de Datos</h2>
-        <button class="modal-close" onclick="closeModal()">&times;</button>
-      </div>
-      <div class="modal-body">
-        <p>En cumplimiento del Reglamento General de Protección de Datos (RGPD) y la LOPDGDD, le informamos detalladamente sobre el tratamiento de sus datos:</p>
-        
-        <h3>1. Responsable del Tratamiento</h3>
-        <p>El responsable de los datos recogidos en este formulario es <strong>Luis González Moreno</strong>, con correo electrónico de contacto <a href="mailto:luis.gonzalezm@gmail.com" style="color:var(--accent)">luis.gonzalezm@gmail.com</a>.</p>
-        
-        <h3>2. Finalidad y Legitimación</h3>
-        <p>La finalidad del tratamiento de sus datos es el cálculo de un presupuesto orientativo de administración de fincas y la gestión de su solicitud de contacto para dicho servicio. La base legal que legitima este tratamiento es su consentimiento expreso, otorgado al marcar la casilla de aceptación y enviar el formulario.</p>
-        
-        <h3>3. Cesión de datos a terceros</h3>
-        <p>Para que usted reciba la oferta personalizada solicitada, sus datos de contacto y las características de su finca <strong>serán cedidos a administradores de fincas profesionales o empresas de gestión de comunidades</strong> interesados en prestarle sus servicios. Una vez recibida la información, dichos terceros actuarán como responsables independientes del tratamiento de acuerdo a sus propias políticas de privacidad.</p>
-        
-        <h3>4. Almacenamiento y Conservación</h3>
-        <p>Los datos son procesados y almacenados a través de la plataforma <strong>Google Workspace (Google Forms)</strong>, lo cual puede implicar transferencias internacionales de datos protegidas por las Cláusulas Contractuales Tipo de la Comisión Europea. Sus datos se conservarán únicamente durante el tiempo necesario para gestionar su solicitud de presupuesto o hasta que usted solicite su supresión.</p>
-        
-        <h3>5. Sus Derechos</h3>
-        <p>Usted puede ejercer en cualquier momento sus derechos de acceso, rectificación, supresión, limitación y oposición. Para ello, debe enviar un correo electrónico a <a href="mailto:luis.gonzalezm@gmail.com" style="color:var(--accent)">luis.gonzalezm@gmail.com</a> indicando el derecho que desea ejercer. Asimismo, si considera que sus datos no están siendo tratados correctamente, tiene derecho a presentar una reclamación ante la Agencia Española de Protección de Datos (AEPD).</p>
-      </div>
-      <div class="actions">
-        <button class="btn btn-primary" onclick="closeModal()">Cerrar y aceptar</button>
-      </div>
-    </div>
-  </div>
-
-  <header>
-</header>
-
-  <section class="hero-cotizador">
+    <header></header>
+    
+    <section class="hero-cotizador">
     <div class="container-narrow">
       <h1>Calculadora de Cuotas</h1>
       <p>Obtenga una estimación inmediata del coste de administración para su finca.</p>
@@ -210,7 +164,7 @@
   <footer>
   </footer>
 
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAB6_6mz_TzxBl-bFTBOxKgfy0M5FPqIOI&libraries=places&callback=initAutocomplete" async defer></script>
-  <script src="assets/js/main.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=TU_API_KEY&libraries=places&callback=initAutocomplete" async defer></script>
+  <script src="assets/js/main.min.js"></script>
 </body>
 </html>

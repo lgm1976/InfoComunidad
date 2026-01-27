@@ -99,49 +99,66 @@ function initMobileMenu() {
 }
 
 /* ==========================================
-   SECCIÓN: INDEX (Carrusel)
+   SECCIÓN: INDEX (Carrusel - MÚLTIPLE)
    ========================================== */
 function initCarousel() {
-    const track = document.querySelector('.carousel-track');
-    const items = Array.from(document.querySelectorAll('.carousel-item'));
-    const prev = document.querySelector('.carousel-btn.prev');
-    const next = document.querySelector('.carousel-btn.next');
+    // Obtener todos los carruseles en la página
+    const carousels = document.querySelectorAll('.services-carousel');
+    
+    carousels.forEach(carousel => {
+        const track = carousel.querySelector('.carousel-track');
+        const items = Array.from(track.querySelectorAll('.carousel-item'));
+        const prevBtn = carousel.querySelector('.carousel-btn.prev');
+        const nextBtn = carousel.querySelector('.carousel-btn.next');
+        
+        if (!track || !items.length || !prevBtn || !nextBtn) return;
 
-    const visible = window.innerWidth < 768 ? 1 : 3;
-    let index = visible;
+        const visible = window.innerWidth < 768 ? 1 : 3;
+        let index = visible;
 
-    const clonesBefore = items.slice(-visible).map(el => el.cloneNode(true));
-    const clonesAfter = items.slice(0, visible).map(el => el.cloneNode(true));
-    clonesBefore.forEach(clone => track.prepend(clone));
-    clonesAfter.forEach(clone => track.append(clone));
+        // Clonar elementos para efecto infinito
+        const clonesBefore = items.slice(-visible).map(el => el.cloneNode(true));
+        const clonesAfter = items.slice(0, visible).map(el => el.cloneNode(true));
+        clonesBefore.forEach(clone => track.prepend(clone));
+        clonesAfter.forEach(clone => track.append(clone));
 
-    const allItems = Array.from(track.children);
-    const getWidth = () => allItems[0].offsetWidth;
+        const allItems = Array.from(track.children);
+        const getWidth = () => allItems[0].offsetWidth;
 
-    const move = (animate = true) => {
-        track.style.transition = animate ? 'transform .4s ease' : 'none';
-        track.style.transform = `translateX(-${index * getWidth()}px)`;
-    };
+        const move = (animate = true) => {
+            track.style.transition = animate ? 'transform .4s ease' : 'none';
+            track.style.transform = `translateX(-${index * getWidth()}px)`;
+        };
 
-    move(false);
+        move(false);
 
-    next.addEventListener('click', () => {
-        index++;
-        move(true);
-        if (index === allItems.length - visible) {
-            setTimeout(() => { index = visible; move(false); }, 400);
-        }
+        // Evento para botón siguiente
+        nextBtn.addEventListener('click', () => {
+            index++;
+            move(true);
+            if (index === allItems.length - visible) {
+                setTimeout(() => { 
+                    index = visible; 
+                    move(false); 
+                }, 400);
+            }
+        });
+
+        // Evento para botón anterior
+        prevBtn.addEventListener('click', () => {
+            index--;
+            move(true);
+            if (index === 0) {
+                setTimeout(() => { 
+                    index = allItems.length - (visible * 2); 
+                    move(false); 
+                }, 400);
+            }
+        });
+
+        // Redimensionamiento responsive
+        window.addEventListener('resize', () => move(false));
     });
-
-    prev.addEventListener('click', () => {
-        index--;
-        move(true);
-        if (index === 0) {
-            setTimeout(() => { index = allItems.length - (visible * 2); move(false); }, 400);
-        }
-    });
-
-    window.addEventListener('resize', () => move(false));
 }
 
 /* ==========================================

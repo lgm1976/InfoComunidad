@@ -3,19 +3,48 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="Luis González Moreno" />
+  <meta name="theme-color" content="#5c3c3c" />
 
-<meta property="og:title" content="InfoComunidad - Comunidades de vecinos">
-<meta property="og:description" content="Buscador inteligente de profesionales 24h, gestión de servicios y herramientas útiles para comunidades de vecinos.">
-<meta property="og:image" content="https://lgm1976.github.io/InfoComunidad/assets/img/favicon.png">
-<meta property="og:url" content="https://lgm1976.github.io/InfoComunidad/">
-<meta property="og:type" content="website">
   <title>InfoComunidad | Gestión y Directorio para Comunidades de Vecinos</title>
-<meta name="description" content="Tu portal de confianza para la gestión de comunidades: herramientas, directorio de profesionales y guías útiles para vecinos.">
-<link rel="canonical" href="https://lgm1976.github.io/InfoComunidad/" />
+  <meta name="description" content="Tu portal de confianza para la gestión de comunidades: herramientas, directorio de profesionales y guías útiles para vecinos." />
+
+  <!-- Open Graph Tags -->
+  <meta property="og:title" content="InfoComunidad - Comunidades de vecinos" />
+  <meta property="og:description" content="Buscador inteligente de profesionales 24h, gestión de servicios y herramientas útiles para comunidades de vecinos." />
+  <meta property="og:image" content="https://lgm1976.github.io/InfoComunidad/assets/img/favicon.png" />
+  <meta property="og:url" content="https://lgm1976.github.io/InfoComunidad/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="InfoComunidad" />
+
+  <!-- Twitter Card Tags -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="InfoComunidad | Gestión y Directorio para Comunidades de Vecinos" />
+  <meta name="twitter:description" content="Tu portal de confianza para la gestión de comunidades: herramientas, directorio de profesionales y guías útiles para vecinos." />
+  <meta name="twitter:image" content="https://lgm1976.github.io/InfoComunidad/assets/img/favicon.png" />
+
+  <link rel="canonical" href="https://lgm1976.github.io/InfoComunidad/" />
+
+  <!-- Structured Data (Schema.org) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "InfoComunidad",
+    "description": "Portal de información y asesoramiento para comunidades de propietarios",
+    "url": "https://lgm1976.github.io/InfoComunidad/",
+    "creator": {
+      "@type": "Person",
+      "name": "Luis González Moreno"
+    }
+  }
+  </script>
+
   <link rel="icon" type="image/png" href="assets/img/favicon.png">
 
   <!-- ESTILO CSS -->
-  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="assets/css/styles.min.css">
 
   <!-- GOOGLE FONT · LATO -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -192,38 +221,106 @@
 <section id="resenas" class="section" style="background:#f8fafc">
   <div class="container center">
     <h2>Opiniones sobre el servicio</h2>
-    
-    <div class="grid grid-3" style="margin-top:64px">
-      <div class="card">
-        <div class="rating" aria-label="Puntuación 5 de 5">★★★★★</div>
-        <div class="score">5/5</div>
-        <p class="review-text">
-          La información y las explicaciones nos ayudaron a entender mejor las cuentas y tomar decisiones
-           con criterio en la junta.</p>
-        <div class="review-author">María G.</div>
-        <div class="review-role">Presidenta de comunidad</div>
-      </div>
 
-      <div class="card">
-        <div class="rating" aria-label="Puntuación 4 de 5">★★★★☆</div>
-        <div class="score">4/5</div>
-        <p class="review-text">
-          Servicio claro y cercano. Resolvieron nuestras dudas antes de tomar decisiones
-           importantes en la comunidad.</p>
-        <div class="review-author">Antonio L.</div>
-        <div class="review-role">Propietario</div>
-      </div>
+    <div class="services-carousel" aria-label="Carrusel de opiniones" style="margin-top:64px">
+      <button class="carousel-btn prev" aria-label="Anterior">&lsaquo;</button>
 
-      <div class="card">
-        <div class="rating" aria-label="Puntuación 5 de 5">★★★★★</div>
-        <div class="score">5/5</div>
-        <p class="review-text">
-          Como profesional externo, agradezco la claridad con la que explican
-           procesos y responsabilidades.</p>
-        <div class="review-author">Carlos R.</div>
-        <div class="review-role">Proveedor de mantenimiento</div>
-      </div>
+      <div class="carousel-viewport">
+        <div class="carousel-track">
+          
+          <div class="carousel-item">
+            <div class="card center" style="display: flex; flex-direction: column; justify-content: space-between; padding: 20px; min-height: 280px;">
+              <div>
+                <div class="rating" aria-label="Puntuación 5 de 5">★★★★★</div>
+                <div class="score">5/5</div>
+                <p class="review-text" style="font-size: 0.9rem; line-height: 1.4; margin: 10px 0; overflow: hidden;">
+                  La información y las explicaciones nos ayudaron a entender mejor las cuentas y tomar decisiones con criterio en la junta.</p>
+              </div>
+              <div>
+                <div class="review-author" style="margin-top: 15px;">María G.</div>
+                <div class="review-role">Presidenta de comunidad</div>
+              </div>
+            </div>
+          </div>
 
+          <div class="carousel-item">
+            <div class="card center" style="display: flex; flex-direction: column; justify-content: space-between; padding: 20px; min-height: 280px;">
+              <div>
+                <div class="rating" aria-label="Puntuación 4 de 5">★★★★☆</div>
+                <div class="score">4/5</div>
+                <p class="review-text" style="font-size: 0.9rem; line-height: 1.4; margin: 10px 0; overflow: hidden;">
+                  Servicio claro y cercano. Resolvieron nuestras dudas antes de tomar decisiones importantes en la comunidad.</p>
+              </div>
+              <div>
+                <div class="review-author" style="margin-top: 15px;">Antonio L.</div>
+                <div class="review-role">Propietario</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="carousel-item">
+            <div class="card center" style="display: flex; flex-direction: column; justify-content: space-between; padding: 20px; min-height: 280px;">
+              <div>
+                <div class="rating" aria-label="Puntuación 5 de 5">★★★★★</div>
+                <div class="score">5/5</div>
+                <p class="review-text" style="font-size: 0.9rem; line-height: 1.4; margin: 10px 0; overflow: hidden;">
+                  Como profesional externo, agradezco la claridad con la que explican procesos y responsabilidades.</p>
+              </div>
+              <div>
+                <div class="review-author" style="margin-top: 15px;">Carlos R.</div>
+                <div class="review-role">Proveedor de mantenimiento</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="carousel-item">
+            <div class="card center" style="display: flex; flex-direction: column; justify-content: space-between; padding: 20px; min-height: 280px;">
+              <div>
+                <div class="rating" aria-label="Puntuación 5 de 5">★★★★★</div>
+                <div class="score">5/5</div>
+                <p class="review-text" style="font-size: 0.9rem; line-height: 1.4; margin: 10px 0; overflow: hidden;">
+                  Excelente trabajo. Nos ayudaron a reducir gastos y mejorar la comunicación con los vecinos de forma significativa.</p>
+              </div>
+              <div>
+                <div class="review-author" style="margin-top: 15px;">Isabel M.</div>
+                <div class="review-role">Vicepresidenta de comunidad</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="carousel-item">
+            <div class="card center" style="display: flex; flex-direction: column; justify-content: space-between; padding: 20px; min-height: 280px;">
+              <div>
+                <div class="rating" aria-label="Puntuación 4 de 5">★★★★☆</div>
+                <div class="score">4/5</div>
+                <p class="review-text" style="font-size: 0.9rem; line-height: 1.4; margin: 10px 0; overflow: hidden;">
+                  Muy recomendable. Los asesoramientos fueron precisos y nos permitieron tomar decisiones más informadas.</p>
+              </div>
+              <div>
+                <div class="review-author" style="margin-top: 15px;">Francisco J.</div>
+                <div class="review-role">Secretario de comunidad</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="carousel-item">
+            <div class="card center" style="display: flex; flex-direction: column; justify-content: space-between; padding: 20px; min-height: 280px;">
+              <div>
+                <div class="rating" aria-label="Puntuación 5 de 5">★★★★★</div>
+                <div class="score">5/5</div>
+                <p class="review-text" style="font-size: 0.9rem; line-height: 1.4; margin: 10px 0; overflow: hidden;">
+                  Profesionales de confianza. Solucionaron todos nuestros problemas de gestión de forma rápida y eficaz.</p>
+              </div>
+              <div>
+                <div class="review-author" style="margin-top: 15px;">Rosa V.</div>
+                <div class="review-role">Propietaria con experiencia</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <button class="carousel-btn next" aria-label="Siguiente">&rsaquo;</button>
     </div>
   </div>
 </section>
@@ -287,7 +384,7 @@
 <footer>
 </footer>
 
-<script src="assets/js/main.js"></script>
+<script src="assets/js/main.min.js"></script>
 
 </body>
 </html>
