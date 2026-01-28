@@ -1,0 +1,19 @@
+{
+  "name": "infocomunidad",
+  "version": "1.0.0",
+  "description": "Portal de información y asesoramiento para comunidades de propietarios",
+  "scripts": {
+    "minify:css": "cleancss -o assets/css/styles.min.css assets/css/styles.css",
+    "minify:js": "terser assets/js/main.js -o assets/js/main.min.js",
+    "minify": "npm run minify:css && npm run minify:js",
+    "watch": "onchange 'assets/css/styles.css' 'assets/js/main.js' -- npm run minify"
+  },
+  "keywords": [],
+  "author": "Luis González Moreno",
+  "license": "ISC",
+  "devDependencies": {
+    "clean-css-cli": "^5.6.3",
+    "onchange": "^7.1.0",
+    "terser": "^5.46.0"
+  }
+}
