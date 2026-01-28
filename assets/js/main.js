@@ -396,3 +396,69 @@ function enviarContacto() {
         btn.disabled = false;
     });
 }
+
+/* ==========================================
+   SECCIÓN: TEST COMUNIDAD
+   ========================================== */
+let score = 0;
+let currentStep = 1;
+
+function startTest() {
+    document.getElementById('test-intro').style.display = 'none';
+    document.getElementById('test-area').style.display = 'block';
+    document.getElementById('result-area').style.display = 'none';
+}
+
+function nextStep(points) {
+    score += points;
+    currentStep++;
+    
+    // Oculta todas las tarjetas
+    document.querySelectorAll('.question-card').forEach(card => {
+        card.classList.remove('active');
+    });
+
+    // Muestra la siguiente
+    const nextCard = document.querySelector(`.question-card[data-step="${currentStep}"]`);
+    if (nextCard) {
+        nextCard.classList.add('active');
+    }
+
+    // Actualiza progreso (100 / 8 preguntas = 12.5)
+    const progress = (currentStep - 1) * 12.5;
+    document.getElementById('progress').style.width = `${progress}%`;
+}
+
+function finishTest(points) {
+    score += points;
+    document.getElementById('test-area').style.display = 'none';
+    document.getElementById('result-area').style.display = 'block';
+
+    const finalScoreElement = document.getElementById('final-score');
+    const resultTextElement = document.getElementById('result-text');
+    let resultText = "";
+
+    const maxScore = 129; // Suma de las puntuaciones máximas de las 8 preguntas
+    const scaledScore = Math.round((score / maxScore) * 100);
+
+    finalScoreElement.innerText = scaledScore;
+
+    if (scaledScore >= 76) {
+        finalScoreElement.style.borderColor = '#28a745'; // verde
+        resultText = "¡Excelente! Tu comunidad está en muy buenas manos y sigue las mejores prácticas. La gestión parece transparente y eficiente.";
+    } else if (scaledScore >= 50) {
+        finalScoreElement.style.borderColor = '#ffc107'; // naranja
+        resultText = "Aprobado justo. Hay cosas que funcionan, pero existen áreas importantes de mejora. Una gestión más proactiva podría optimizar recursos y prevenir problemas.";
+    } else {
+        finalScoreElement.style.borderColor = '#dc3545'; // rojo
+        resultText = "¡Alerta roja! Tu comunidad necesita atención urgente. Es muy probable que estéis perdiendo dinero y no cumpliendo con la normativa. Es hora de actuar.";
+    }
+    resultTextElement.innerText = resultText;
+}
+
+// Inicializamos el estado del test para que el resultado no se vea al cargar la página
+document.addEventListener('DOMContentLoaded', () => {
+    if (document.getElementById('test-area')) {
+        document.getElementById('result-area').style.display = 'none';
+    }
+});

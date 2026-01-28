@@ -865,7 +865,14 @@ footer {
    ========================================================= */
 
 .section.dark {
-  background-color: var(--primary); 
+  background:
+  linear-gradient(
+    to bottom,
+    rgba(91, 15, 26, 0.8),
+    rgba(91, 15, 26, 0.65)
+  ),
+  url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?fit=crop&w=1920&q=80')
+  center / cover no-repeat;
   color: #ffffff;
   display: flex;
   flex-direction: column;
@@ -1152,4 +1159,184 @@ footer {
     .search-box select, .search-box input, .search-box button {
         width: 100%;
     }
+}
+
+/* =========================================================
+   PÁGINA TEST
+   ========================================================= */
+.test-container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+  text-align: center;
+}
+
+#test-intro h1 {
+  font-size: 2.5rem;
+  color: var(--primary);
+  margin-bottom: 15px;
+}
+
+#test-intro p {
+  font-size: 1.1rem;
+  color: var(--muted);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.question-card {
+  display: none; /* Oculta todas las preguntas por defecto */
+  padding: 20px;
+  background: #fff;
+  border-radius: var(--radius);
+  animation: fadeIn 0.5s;
+}
+
+.question-card.active {
+  display: block; /* Muestra solo la activa */
+}
+
+.question-card h3 {
+  font-size: 1.8rem;
+  color: var(--secondary);
+  margin-bottom: 30px;
+}
+
+.options-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 15px;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.option-btn {
+  width: 100%;
+  padding: 18px;
+  font-size: 1rem;
+  text-align: center;
+  background: #fff;
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.option-btn:hover {
+  background: var(--light);
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+}
+
+#result-area h2 {
+    color: var(--primary);
+}
+
+.score-circle {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin: 20px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3.5rem;
+  font-weight: bold;
+  color: var(--text);
+  border: 8px solid #eee;
+  transition: border-color 0.5s;
+}
+
+#result-text {
+  font-size: 1.1rem;
+  color: var(--muted);
+  max-width: 600px;
+  margin: 0 auto 20px;
+}
+
+/* =========================================================
+   PÁGINA GUÍAS
+   ========================================================= */
+
+.hero-guias {
+  background:
+  linear-gradient(
+    to bottom,
+    rgba(91, 15, 26, 0.8),
+    rgba(91, 15, 26, 0.65)
+  ),
+  url('https://images.unsplash.com/photo-1481627834876-b7833e8f5570?fit=crop&w=1920&q=80')
+  center / cover no-repeat;
+  color: #fff;
+  text-align: center;
+  padding: 80px 24px; /* Aumentamos el padding para un mejor aspecto */
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.hero-guias h1 {
+  color: #fff;
+  font-size: 2.8rem;
+}
+
+.hero-guias p {
+  color: rgba(255,255,255,0.8);
+  font-size: 1.1rem;
+}
+
+.guias-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  padding: 60px 0;
+}
+
+.guia-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.guia-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(91, 15, 26, 0.12);
+  border-color: var(--secondary);
+}
+
+.guia-card-content {
+  padding: 25px;
+  flex-grow: 1; /* Empuja el footer hacia abajo */
+}
+
+.guia-card-content h3 {
+  color: var(--secondary);
+  font-size: 1.3rem;
+  padding:0px;
+}
+
+.guia-card-content p {
+  font-size: 0.95rem;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.guia-card-footer {
+  padding: 0 25px 25px 25px;
+  border-top: 1px solid var(--border);
+  margin-top: auto; /* Se asegura que se alinee abajo */
+  padding-top: 20px;
+}
+
+.btn-leer {
+  color: var(--primary);
+  font-weight: bold;
+  text-decoration: none;
 }

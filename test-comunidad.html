@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Test de Salud para tu Comunidad - InfoComunidad</title>
-    <link rel="stylesheet" href="assets/css/styles.min.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="icon" type="image/png" href="assets/img/favicon.png">
 </head>
 <body>
@@ -60,9 +60,36 @@
             <div class="question-card" data-step="5">
               <h3>5. ¿Se han solicitado ayudas/subvenciones en los últimos 2 años?</h3>
               <div class="options-grid">
-                <button class="option-btn" onclick="finishTest(20)">Sí, estamos al día</button>
-                <button class="option-btn" onclick="finishTest(5)">Se intentó pero sin éxito</button>
-                <button class="option-btn" onclick="finishTest(0)">No, perdemos todas las ayudas</button>
+                <button class="option-btn" onclick="nextStep(12)">Sí, estamos al día</button>
+                <button class="option-btn" onclick="nextStep(6)">Se intentó pero sin éxito</button>
+                <button class="option-btn" onclick="nextStep(0)">No, perdemos todas las ayudas</button>
+              </div>
+            </div>
+
+            <div class="question-card" data-step="6">
+              <h3>6. ¿Cómo se comunican los avisos importantes (cortes de agua, etc.)?</h3>
+              <div class="options-grid">
+                <button class="option-btn" onclick="nextStep(13)">Por email o una App al instante</button>
+                <button class="option-btn" onclick="nextStep(7)">Con un papel en el ascensor</button>
+                <button class="option-btn" onclick="nextStep(0)">Normalmente no nos enteramos</button>
+              </div>
+            </div>
+
+            <div class="question-card" data-step="7">
+              <h3>7. ¿La comunidad ha implementado medidas de ahorro energético?</h3>
+              <div class="options-grid">
+                <button class="option-btn" onclick="nextStep(12)">Sí, tenemos luces LED y/o sensores</button>
+                <button class="option-btn" onclick="nextStep(6)">Se ha hablado, pero no se ha hecho nada</button>
+                <button class="option-btn" onclick="nextStep(0)">No, y las facturas de luz son altísimas</button>
+              </div>
+            </div>
+
+            <div class="question-card" data-step="8">
+              <h3>8. ¿Cuánto tarda en resolverse una incidencia común (ej. luz fundida)?</h3>
+              <div class="options-grid">
+                <button class="option-btn" onclick="finishTest(12)">Menos de 48 horas</button>
+                <button class="option-btn" onclick="finishTest(6)">Una semana o más</button>
+                <button class="option-btn" onclick="finishTest(0)">Hay que avisar varias veces o no se arregla</button>
               </div>
             </div>
           </div>
@@ -81,6 +108,6 @@
       </main>
   
     <footer></footer>
-    <script src="assets/js/main.min.js"></script>
+    <script src="assets/js/main.js"></script>
 </body>
 </html>
