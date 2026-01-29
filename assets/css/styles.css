@@ -1670,3 +1670,10 @@ footer {
     background-color: var(--light) !important;
     color: var(--primary);
 }
+
+/* Estilo para el logo del header */
+.logo-img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
