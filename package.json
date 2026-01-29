@@ -4,9 +4,9 @@
   "description": "Portal de información y asesoramiento para comunidades de propietarios",
   "scripts": {
     "minify:css": "cleancss -o assets/css/styles.min.css assets/css/styles.css",
-    "minify:js": "terser assets/js/main.js -o assets/js/main.min.js",
+    "minify:js": "terser assets/js/main.js -o assets/js/main.min.js && terser assets/js/subvenciones.js -o assets/js/subvenciones.min.js",
     "minify": "npm run minify:css && npm run minify:js",
-    "watch": "onchange 'assets/css/styles.css' 'assets/js/main.js' -- npm run minify"
+    "watch": "onchange 'assets/css/styles.css' 'assets/js/main.js' 'assets/js/subvenciones.js' -- npm run minify"
   },
   "keywords": [],
   "author": "Luis González Moreno",

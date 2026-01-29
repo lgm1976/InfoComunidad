@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscador de Subvenciones - InfoComunidad</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css"/>
+    <link rel="icon" type="image/png" href="assets/img/favicon.png">
+</head>
+<body>
+    <header></header>
+
+    <section class="hero-guias">
+        <div class="container center">
+            <h1>Buscador de Subvenciones</h1>
+            <p>Encuentra las ayudas y subvenciones disponibles para tu comunidad de propietarios.</p>
+        </div>
+    </section>
+
+    <main class="container" style="padding-top: 40px; padding-bottom: 60px;">
+        <!-- ZONA DE BÚSQUEDA -->
+        <div class="subvenciones-search-wrapper">
+            <div id="search-container" class="subvenciones-search-box">
+                <div class="subvenciones-search-box__select">
+                    <select id="municipio-select" aria-label="Selecciona un municipio">
+                        <option value="">Todos los municipios</option>
+                    </select>
+                </div>
+                <div class="subvenciones-search-box__button">
+                    <button id="search-btn" class="btn btn-primary">Buscar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ZONA DE RESULTADOS -->
+        <div id="results-container" class="guias-grid" style="padding-top: 40px;">
+            <!-- Las subvenciones se cargarán aquí dinámicamente -->
+        </div>
+        
+        <!-- MENSAJE DE "NO HAY RESULTADOS" -->
+        <div id="no-results" class="center" style="display: none; padding: 40px;">
+            <p style="font-size: 1.1rem; color: var(--muted);">No se han encontrado subvenciones para los criterios seleccionados.</p>
+        </div>
+
+        <!-- ZONA DE "CROWDSOURCING" -->
+        <div style="text-align: center; background: var(--light); padding: 30px; border-radius: var(--radius); margin-top: 60px;">
+            <h3 style="padding:0; margin-bottom:10px; font-size: 1.4rem;">¿Conoces alguna ayuda que no está en la lista?</h3>
+            <p style="max-width: 600px; margin: 0 auto 20px;">Tu colaboración es fundamental para mantener esta herramienta actualizada. Si conoces alguna subvención que no aparece aquí, te agradecemos que nos lo comuniques.</p>
+            <a href="mailto:tucorreo@ejemplo.com?subject=Nueva subvención para InfoComunidad" class="btn btn-outline">Informar de una nueva ayuda</a>
+        </div>
+    </main>
+
+    <footer></footer>
+    <script src="assets/js/main.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+    <script src="assets/js/subvenciones.js"></script>
+</body>
+</html>

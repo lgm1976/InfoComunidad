@@ -1328,6 +1328,19 @@ footer {
   line-height: 1.6;
 }
 
+/* Nueva regla para limitar el número de líneas en la descripción */
+.guia-card p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    color: var(--text-color);
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Mostramos un máximo de 3 líneas para la descripción */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .guia-card-footer {
   padding: 0 25px 25px 25px;
   border-top: 1px solid var(--border);
@@ -1358,4 +1371,302 @@ footer {
 
 .center-content {
   text-align: center;
+}
+
+/* =========================================================
+   PÁGINA SUBVENCIONES
+   ========================================================= */
+
+.guias-grid {
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+}
+
+.guia-card {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.guia-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(91, 15, 26, 0.1);
+    border-color: var(--accent);
+}
+
+.guia-card-content {
+    padding: 20px;
+}
+
+.guia-card-footer {
+    padding: 0px 20px 20px 20px;
+    border-top: 1px solid var(--border);
+    margin-top: auto;
+    background-color: var(--light);
+}
+
+.guia-card h3 {
+    font-size: 1.1rem; /* Reducimos el tamaño del título */
+    margin-bottom: 10px;
+    line-height: 1.4;
+    color: var(--primary);
+    display: -webkit-box;
+    -webkit-line-clamp: 4; /* Mostramos un máximo de 4 líneas para el título */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-height: 100px; /* Aseguramos una altura mínima para alinear tarjetas */
+}
+.guia-card p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    color: var(--text-color);
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Mostramos un máximo de 3 líneas para la descripción */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.btn-leer {
+    color: var(--secondary);
+    font-weight: bold;
+    font-size: 0.9rem;
+    text-decoration: none;
+}
+
+.subvencion-header {
+    margin-bottom: 15px;
+}
+
+.subvencion-ambito {
+    background-color: var(--light);
+    color: var(--secondary);
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.subvencion-municipio,
+.subvencion-fecha {
+    font-size: 0.9rem;
+    color: var(--muted);
+    margin-bottom: 0;
+}
+.subvencion-tags {
+    margin-top: 15px;
+}
+
+.subvencion-tags span {
+    background-color: #eee;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    margin-right: 5px;
+    display: inline-block;
+    margin-bottom: 5px;
+}
+
+/* =========================================================
+   PÁGINA SUBVENCIONES
+   ========================================================= */
+
+
+
+.guias-grid {
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+}
+
+.guia-card {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.guia-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(91, 15, 26, 0.1);
+    border-color: var(--accent);
+}
+
+.guia-card-content {
+    padding: 20px;
+}
+
+.guia-card-footer {
+    padding: 0px 20px 20px 20px;
+    border-top: 1px solid var(--border);
+    margin-top: auto;
+    background-color: var(--light);
+}
+
+.guia-card h3 {
+    font-size: 1.1rem; /* Reducimos el tamaño del título */
+    margin-bottom: 10px;
+    line-height: 1.4;
+    color: var(--primary);
+    display: -webkit-box;
+    -webkit-line-clamp: 4; /* Mostramos un máximo de 4 líneas para el título */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-height: 100px; /* Aseguramos una altura mínima para alinear tarjetas */
+}
+.guia-card p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    color: var(--text-color);
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Mostramos un máximo de 3 líneas para la descripción */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.btn-leer {
+    color: var(--secondary);
+    font-weight: bold;
+    font-size: 0.9rem;
+    text-decoration: none;
+}
+
+.subvencion-header {
+    margin-bottom: 15px;
+}
+
+.subvencion-ambito {
+    background-color: var(--light);
+    color: var(--secondary);
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.subvencion-municipio,
+.subvencion-fecha {
+    font-size: 0.9rem;
+    color: var(--muted);
+    margin-bottom: 0;
+}
+.subvencion-tags {
+    margin-top: 15px;
+}
+
+.subvencion-tags span {
+    background-color: #eee;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    margin-right: 5px;
+    display: inline-block;
+    margin-bottom: 5px;
+}
+
+/* =========================================================
+   PÁGINA SUBVENCIONES (ESTILOS AISLADOS Y DEFINITIVOS)
+   ========================================================= */
+
+/* 1. Contenedor para centrar la barra de búsqueda en la página */
+.subvenciones-search-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+/* 2. La barra de búsqueda: flexbox para alinear los DIVs hijos en una línea */
+.subvenciones-search-box {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: stretch;
+    width: 100%;
+    max-width: 1000px; /* Ampliado para ocupar más ancho */
+}
+/* =========================================================
+   P�GINA SUBVENCIONES (ESTILOS AISLADOS Y DEFINITIVOS)
+   ========================================================= */
+
+/* 1. Contenedor para centrar la barra de b�squeda en la p�gina */
+.subvenciones-search-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+/* 2. La barra de b�squeda: flexbox para alinear los DIVs hijos en una l�nea */
+.subvenciones-search-box {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: stretch;
+    width: 100%;
+    max-width: 1000px; /* Ancho m�ximo amplio */
+}
+
+/* 3. El DIV que envuelve al selector ocupar� todo el espacio disponible */
+.subvenciones-search-box__select {
+    flex: 1; /* Esto hace que crezca para ocupar todo el espacio sobrante */
+    display: flex; 
+    flex-direction: column; 
+    min-width: 0; /* Evita desbordamientos en flexbox */
+}
+
+/* 4. Hacemos que el plugin Choices.js ocupe el 100% de la altura de su DIV padre */
+#search-container .choices,
+#search-container .choices__inner {
+    height: 100% !important;
+    width: 100% !important;
+}
+
+/* 5. El DIV del bot�n no necesita estilos, se adapta solo. */
+.subvenciones-search-box__button {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 6. Hacemos que el bot�n ocupe el 100% de la altura de su DIV padre */
+.subvenciones-search-box__button .btn {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* --- Estilos visuales del selector (plugin Choices.js) --- */
+.subvenciones-search-box .choices__inner {
+    min-height: auto !important;
+    padding: 0 15px !important;
+    display: flex !important;
+    align-items: center !important;
+    border-radius: var(--radius) !important;
+    border: 1px solid var(--border) !important;
+    font-size: 0.9rem !important;
+    background: #fff !important;
+}
+
+.choices[data-type*='select-one']::after {
+    right: 15px !important;
+    border-color: var(--muted) transparent transparent !important;
+    margin-top: -5px !important;
+}
+
+.choices__list--dropdown .choices__item--selectable.is-highlighted {
+    background-color: var(--light) !important;
+    color: var(--primary);
 }
