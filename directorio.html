@@ -21,7 +21,7 @@
     <meta name="twitter:description" content="Encuentra administradores, fontaneros, electricistas y más profesionales verificados para tu comunidad de propietarios en nuestro directorio.">
     <meta name="twitter:image" content="https://lgm1976.github.io/InfoComunidad/assets/img/favicon.png">
 
-    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/styles.min.css">
     <link rel="icon" type="image/png" href="assets/img/favicon.png">
 </head>
 <body>
@@ -54,7 +54,7 @@
   </optgroup>
 </select>
         <input type="text" id="locationInput" placeholder="Ciudad o Código Postal (ej: Madrid)">
-        <button class="btn-presupuesto" onclick="searchPlaces()">Buscar</button>
+        <button class="btn-presupuesto" id="searchButton">Buscar</button>
       </div>
     </div>
   </section>
@@ -69,7 +69,7 @@
   <footer></footer>
 
   <!-- 1. Cargar nuestros scripts primero para que las funciones existan -->
-  <script src="assets/js/main.min.js"></script>
+  <script src="assets/js/main.min.js" defer></script>
   <script src="assets/js/directorio.js"></script>
 
   <!-- 2. Cargar el script de Google al final. Ahora sí encontrará la función initMap -->

@@ -231,6 +231,8 @@ nav a.active {
   background: var(--secondary);
   color: #ffffff;
   width: 100%;
+  margin-top: auto; /* Empuja el botÃ³n hacia la parte inferior */
+  flex-shrink: 0;   /* Evita que el botÃ³n se encoja si no hay espacio */
 }
 
 .btn-primary:hover {
@@ -256,8 +258,16 @@ nav a.active {
   padding: 24px;
   transition: all 0.3s ease;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  display: block; 
+  display: flex; 
+  flex-direction: column;
+  height: 100%; /* Asegura que la tarjeta ocupa toda la altura disponible */
   width: auto;    
+}
+
+.card-text-content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
 }
 
 /* Efecto Hover */
@@ -265,6 +275,11 @@ nav a.active {
   transform: translateY(-5px);
   border-color: var(--accent);
   box-shadow: 0 10px 20px rgba(91, 15, 26, 0.1);
+}
+
+.card p {
+  flex-grow: 1; /* Permite que el pÃ¡rrafo ocupe el espacio disponible */
+  /* margin-bottom: 0; Eliminamos el margen inferior para que el botÃ³n se ajuste */
 }
 
 /* =========================================================
@@ -1598,27 +1613,27 @@ footer {
     max-width: 1000px; /* Ampliado para ocupar mÃ¡s ancho */
 }
 /* =========================================================
-   PÁGINA SUBVENCIONES (ESTILOS AISLADOS Y DEFINITIVOS)
+   Pï¿½GINA SUBVENCIONES (ESTILOS AISLADOS Y DEFINITIVOS)
    ========================================================= */
 
-/* 1. Contenedor para centrar la barra de búsqueda en la página */
+/* 1. Contenedor para centrar la barra de bï¿½squeda en la pï¿½gina */
 .subvenciones-search-wrapper {
   display: flex;
   justify-content: center;
   margin-bottom: 40px;
 }
 
-/* 2. La barra de búsqueda: flexbox para alinear los DIVs hijos en una línea */
+/* 2. La barra de bï¿½squeda: flexbox para alinear los DIVs hijos en una lï¿½nea */
 .subvenciones-search-box {
     display: flex;
     flex-direction: row;
     gap: 10px;
     align-items: stretch;
     width: 100%;
-    max-width: 1000px; /* Ancho máximo amplio */
+    max-width: 1000px; /* Ancho mï¿½ximo amplio */
 }
 
-/* 3. El DIV que envuelve al selector ocupará todo el espacio disponible */
+/* 3. El DIV que envuelve al selector ocuparï¿½ todo el espacio disponible */
 .subvenciones-search-box__select {
     flex: 1; /* Esto hace que crezca para ocupar todo el espacio sobrante */
     display: flex; 
@@ -1633,14 +1648,14 @@ footer {
     width: 100% !important;
 }
 
-/* 5. El DIV del botón no necesita estilos, se adapta solo. */
+/* 5. El DIV del botï¿½n no necesita estilos, se adapta solo. */
 .subvenciones-search-box__button {
     flex-shrink: 0;
     display: flex;
     flex-direction: column;
 }
 
-/* 6. Hacemos que el botón ocupe el 100% de la altura de su DIV padre */
+/* 6. Hacemos que el botï¿½n ocupe el 100% de la altura de su DIV padre */
 .subvenciones-search-box__button .btn {
     height: 100%;
     display: flex;

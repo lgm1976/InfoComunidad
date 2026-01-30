@@ -17,19 +17,34 @@ function initMap() {
     infowindow = new google.maps.InfoWindow();
     service = new google.maps.places.PlacesService(map);
     geocoder = new google.maps.Geocoder();
+
+    // Asignar el event listener al botón de búsqueda una vez que la API esté lista
+    const searchButton = document.getElementById('searchButton');
+    if (searchButton) {
+        searchButton.addEventListener('click', searchPlaces);
+    }
 }
 
 /**
  * Función principal de búsqueda.
  */
 function searchPlaces() {
+    // Asegurarse de que el mapa y los servicios de Google Places estén inicializados
+    if (!geocoder || !service) {
+        console.error("Google Maps API no está completamente cargada o inicializada.");
+        document.getElementById('resultsGrid').innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: #b91c1c;">El servicio de búsqueda no está disponible aún. Inténtelo de nuevo en unos segundos.</p>`;
+        return;
+    }
+
     const type = document.getElementById('serviceType').value;
     const locationInput = document.getElementById('locationInput');
     
-    if (locationInput.value.trim() === '') {
-        locationInput.value = "Madrid";
+    // Validar y establecer la ubicación por defecto si está vacía
+    let locationQuery = locationInput.value.trim();
+    if (locationQuery === '') {
+        locationQuery = "Madrid";
+        locationInput.value = "Madrid"; // Actualizar el input con el valor por defecto
     }
-    const locationQuery = locationInput.value;
     const resultsGrid = document.getElementById('resultsGrid');
 
     resultsGrid.innerHTML = `<p style="grid-column: 1/-1; text-align: center;">Localizando "${locationQuery}" en España...</p>`;

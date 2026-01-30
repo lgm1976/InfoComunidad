@@ -44,7 +44,7 @@
   <link rel="icon" type="image/png" href="assets/img/favicon.png">
 
   <!-- ESTILO CSS -->
-  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="assets/css/styles.min.css">
 
   <!-- GOOGLE FONT · LATO -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -79,60 +79,80 @@
 
       <div class="carousel-viewport">
         <div class="carousel-track">
-          <a href="directorio.html"><div class="carousel-item">
-            <div class="card center">
-              <div class="card-icon">
-                <i class="fi fi-rc-briefcase"></i>
+          <div class="carousel-item">
+            <a href="directorio.html">
+              <div class="card center">
+                <div class="card-text-content">
+                  <div class="card-icon">
+                    <i class="fi fi-rc-briefcase"></i>
+                  </div>
+                  <strong>Directorio de Profesionales</strong>
+                  <p>Accede al buscador de profesionales verificados para tu comunidad de vecinos.</p>
+                </div>
+                <span class="btn btn-primary2">Directorio</span>
               </div>
-              <strong>Directorio de Profesionales</strong>
-              <p>Accede al buscador de profesionales verificados para tu comunidad de vecinos.</p>
-              <a href="directorio.html" class="btn btn-primary2">Directorio</a>
-            </div>
-          </div></a>  
+            </a>
+          </div>
 
-          <a href="test-comunidad.html"><div class="carousel-item">
-            <div class="card center">
-              <div class="card-icon">
-                <i class="fi fi-rc-comment-question"></i>
+          <div class="carousel-item">
+            <a href="test-comunidad.html">
+              <div class="card center">
+                <div class="card-text-content">
+                  <div class="card-icon">
+                    <i class="fi fi-rc-comment-question"></i>
+                  </div>
+                  <strong>Test de Eficiencia</strong>
+                  <p>Realiza un cuestionario para evaluar el estado de salud de tu comunidad de vecinos.</p>
+                </div>
+                <span class="btn btn-primary2">Test</span>
               </div>
-              <strong>Test de Eficiencia</strong>
-              <p>Realiza un cuestionario para evaluar el estado de salud de tu comunidad de vecinos.</p>
-              <a href="test-comunidad.html" class="btn btn-primary2">Test</a>
-            </div>
-          </div></a>
+            </a>
+          </div>
 
-          <a href="cotizador.html"><div class="carousel-item">
-            <div class="card center">
-              <div class="card-icon">
-                <i class="fi fi-rc-euro"></i>
+          <div class="carousel-item">
+            <a href="cotizador.html">
+              <div class="card center">
+                <div class="card-text-content">
+                  <div class="card-icon">
+                    <i class="fi fi-rc-euro"></i>
+                  </div>
+                  <strong>Presupuesto Online</strong>
+                  <p>Averigua el coste de una administración de fincas para tu comunidad de propietarios.</p>
+                </div>
+                <span class="btn btn-primary2">Cotización</span>
               </div>
-              <strong>Presupuesto Online</strong>
-              <p>Averigua el coste de una administración de fincas para tu comunidad de propietarios.</p>
-              <a href="cotizador.html" class="btn btn-primary2">Cotización</a>
-            </div>
-          </div></a>
+            </a>
+          </div>
 
-          <a href="guias.html"><div class="carousel-item">
-            <div class="card center">
-              <div class="card-icon">
-                <i class="fi fi-rc-catalog-magazine"></i>
+          <div class="carousel-item">
+            <a href="guias.html">
+              <div class="card center">
+                <div class="card-text-content">
+                  <div class="card-icon">
+                    <i class="fi fi-rc-catalog-magazine"></i>
+                  </div>
+                  <strong>Guías rápidas</strong>
+                  <p>Consejos claros y directos para entender mejor tu comunidad.</p>
+                </div>
+                <span class="btn btn-primary2">Leer</span>
               </div>
-              <strong>Guías rápidas</strong>
-              <p>Averigua el coste de una administración de fincas para tu comunidad de propietarios.</p>
-              <a href="guias.html" class="btn btn-primary2">Leer</a>
-            </div>
-          </div></a>
+            </a>
+          </div>
 
-          <a href="subvenciones.html"><div class="carousel-item">
-            <div class="card center">
-              <div class="card-icon">
-                <i class="fi fi-rc-award"></i>
+          <div class="carousel-item">
+            <a href="subvenciones.html">
+              <div class="card center">
+                <div class="card-text-content">
+                  <div class="card-icon">
+                    <i class="fi fi-rc-award"></i>
+                  </div>
+                  <strong>Buscador de Subvenciones</strong>
+                  <p>Encuentra ayudas y subvenciones públicas para rehabilitación, accesibilidad y eficiencia energética.</p>
+                </div>
+                <span class="btn btn-primary2">Buscar</span>
               </div>
-              <strong>Buscador de Subvenciones</strong>
-              <p>Encuentra ayudas y subvenciones públicas para rehabilitación, accesibilidad y eficiencia energética.</p>
-              <a href="subvenciones.html" class="btn btn-primary2">Buscar</a>
-            </div>
-          </div></a>
+            </a>
+          </div>
         </div>
 
         </div>
@@ -384,7 +404,7 @@
       </form>
     </div>
 
-    <p class="legal-note" style="max-width:520px;margin:16px auto 0;font-size:13px;color:#6b4a4f;">
+    <p class="legal-note" style="max-width:52    npm run minify0px;margin:16px auto 0;font-size:13px;color:#6b4a4f;">
       La información facilitada a través de este formulario será tratada únicamente para gestionar su 
       consulta y contactar con usted en relación con los servicios solicitados. No se utilizará para 
       otros fines ni se cederá a terceros.
@@ -395,7 +415,7 @@
 <footer>
 </footer>
 
-<script src="assets/js/main.min.js"></script>
+<script src="assets/js/main.min.js" defer></script>
 
 </body>
 </html>
